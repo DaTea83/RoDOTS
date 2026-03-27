@@ -1,0 +1,29 @@
+{
+  "name": "com.datea83.choyutilities",
+  "displayName": "ChoyUtilities",
+  "version": "0.1.10",
+  "unity": "2022.3",
+  "unityRelease": "1f1",
+  "description": "Eugene Choy's Personal Unity Library",
+  "dependencies": {
+    "com.unity.test-framework": "1.6.0",
+    "com.unity.burst": "1.8.27",
+    "com.unity.collections": "2.6.5",
+    "com.unity.mathematics": "1.3.2",
+    "com.unity.entities": "1.4.5",
+    "com.unity.entities.graphics": "1.4.18",
+    "com.unity.physics": "1.4.5",
+    "com.unity.inputsystem": "1.18.0",
+    "com.unity.localization": "1.5.9"
+  },
+  "keywords": [
+    "DOTS",
+    "Entities",
+    "ECS"
+  ],
+  "hideInEditor": false,
+  "author": {
+    "name": "datea83",
+    "email": "eugenechoy83@gmail.com"
+  }
+}

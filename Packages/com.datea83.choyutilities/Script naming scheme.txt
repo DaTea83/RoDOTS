@@ -1,0 +1,42 @@
+Script naming scheme:
+
+(Prefix) Mono- 		    : Monobehaviour class that is not part of Baker<>, static or singleton
+(Prefix) UI- 		    : Monobehaviour class that is a UI widget
+(Suffix) -Bridge	    : Monobehaviour class that is not a singleton, doesn't have Baker<> but serves as a bridge between Monobehaviour and ECS
+(Suffix) -Manager	    : Monobehaviour class that is a "don't destroy on load" singleton
+(Suffix) -Controller    : Monobehaviour class that is a local scene singleton
+(Suffix) -Authoring	    : Monobehaviour class that contains Baker<> class
+
+(Prefix) I-             : Interface
+
+// Below is for ECS component, since IComponentData itself is an interface 
+// so they they all have the "I" keyword
+
+(Suffix) -IData		    : Standard IComponentData struct that contains data
+(Suffix) -ITag		    : Empty IComponentData that serves as a tag
+(Suffix) -IEnableable   : Struct that implements both IComponentData and IEnableableComponent
+(Suffix) -IEnableableTag: Combined IEnableable and ITag
+(Suffix) -IClean        : Struct that implements ICleanupComponentData
+(Suffix) -IBuffer	    : Standard IBufferElementData struct
+(Suffix) -ISingleton    : IComponentData that meant to serve as a singleton
+
+// ECS doesn't have the usual static class reference in OOP, 
+// so the singleton here just means there will be only one entity with this component during runtime
+// any less or more than 1 will return an error
+
+(Suffix) -SystemBase    : Class that inherits from SystemBase
+(Suffix) -ISystem       : Struct that inherits from ISystem
+(Suffix) -SystemGroup   : Class that inherits from ComponentSystemGroup
+
+(Suffix) -System        : Special non-Monobehaviour class, usually require a constructor
+
+(Suffix) -Attributes    : Any ScriptableObjects
+
+(Prefix) E-             : Enums
+
+(Suffix) -Serialize     : Any class/struct with [Serializable] attribute
+
+(Suffix) -Collection    : Usually a partial class of HelperCollection, 
+                          is for a static class that holds a bunch of static methods and extensions 
+                          
+(Suffix) -Editor        : Editor class for customized view
