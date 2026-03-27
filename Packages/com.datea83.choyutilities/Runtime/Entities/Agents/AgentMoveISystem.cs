@@ -65,6 +65,8 @@ namespace EugeneC.ECS {
                     var nextNode = node[index].ConnectedNode;
 
                     move.CurrentNode = nextNode;
+                    var nodeLtw = LtwLookup[nextNode];
+                    lt.Rotation = quaternion.LookRotation(nodeLtw.Position, lt.Up());
                 }
             }
         }

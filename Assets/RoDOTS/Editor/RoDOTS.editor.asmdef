@@ -1,0 +1,18 @@
+{
+    "name": "RoDOTS.editor",
+    "rootNamespace": "RoDOTS.editor",
+    "references": [
+        "GUID:3c554c968230c6e4bb46f0a55da9621d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

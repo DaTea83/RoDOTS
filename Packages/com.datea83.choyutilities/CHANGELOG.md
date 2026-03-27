@@ -2,6 +2,10 @@
 
 ## [0.1.10] - 2026-03-27
 
+### Added
+* Added AnimationController
+* Added FlatPlaneAuthoring.prefab
+
 ### Changed
 * ObjTransformIData, now implements IDisposable, the gameobject will be destroyed when the entity is destroyed
 * (Whether EntityTransformIData should also implement IDispoable is on the radar)
