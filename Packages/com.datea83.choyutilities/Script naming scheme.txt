@@ -13,10 +13,11 @@ Script naming scheme:
 // so they they all have the "I" keyword
 
 (Suffix) -IData		    : Standard IComponentData struct that contains data
+(Suffix) -IClassData    : IComponentData but for class
 (Suffix) -ITag		    : Empty IComponentData that serves as a tag
 (Suffix) -IEnableable   : Struct that implements both IComponentData and IEnableableComponent
 (Suffix) -IEnableableTag: Combined IEnableable and ITag
-(Suffix) -IClean        : Struct that implements ICleanupComponentData
+(Suffix) -ICleanup      : Struct that implements ICleanupComponentData
 (Suffix) -IBuffer	    : Standard IBufferElementData struct
 (Suffix) -ISingleton    : IComponentData that meant to serve as a singleton
 

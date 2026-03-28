@@ -10,6 +10,8 @@ namespace EugeneC.ECS {
         public Dictionary<string, int> AnimationIDMap { get; private set; }
 
         private void OnEnable() {
+            AnimationIDMap = new Dictionary<string, int>();
+            
             foreach (var id in animationIds) {
                 var hash = Animator.StringToHash(id);
                 AnimationIDMap.Add(id, hash);

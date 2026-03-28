@@ -5,10 +5,16 @@
 ### Added
 * Added AgentSpawnISingleton
 * HelperCollection, added GetDistanceAndDot() extensions
+* Added GameObjectAuthoring
+* Added InitializeAnimatorAuthoring
+* Added ObjTransformICleanup
 
 ### Changed
 * AgentSpawnISystem, now tracks how many agents are spawned with AgentSpawnISingleton
 * AgentMoveISystem, now before moving towards the target agent it first rotate towards the target
+
+### Removed
+* Removed the IDispoable from ObjTransformIData, destroying gameobject will be handled by ICleanupComponent
 
 ## [0.1.10] - 2026-03-27
 

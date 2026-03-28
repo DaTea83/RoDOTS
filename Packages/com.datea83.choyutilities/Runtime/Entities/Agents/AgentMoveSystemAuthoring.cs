@@ -10,6 +10,7 @@ namespace EugeneC.ECS {
         [SerializeField][Min(0.01f)] private float minSpeed = 1f, maxSpeed = 10f;
         [SerializeField] private bool hasRestTime = true;
         [SerializeField][Min(0.01f)] private float minRestTime = 1f, maxRestTime = 5f;
+        [SerializeField] private ushort spawnLimit = 0;
 
         private void OnValidate() {
             if (minSpeed > maxSpeed) 
@@ -24,7 +25,9 @@ namespace EugeneC.ECS {
             public override void Bake(AgentMoveSystemAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent<AgentSpawnISingleton>(e);
+                AddComponent(e, new AgentSpawnISingleton {
+                    SpawnLimit = authoring.spawnLimit
+                });
                 
                 AddComponent(e, new AgentMoveSystemISingleton {
                     MinSpeed = authoring.minSpeed,

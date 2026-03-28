@@ -49,8 +49,12 @@ namespace EugeneC.ECS {
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var singleton = SystemAPI.GetSingleton<AgentSpawnISingleton>();
+
+            if (singleton.SpawnLimit != 0)
+                if (singleton.SpawnLimit > singleton.TotalSpawnCount) return;
+            
+            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var et = SystemAPI.Time.ElapsedTime;
             var dt = SystemAPI.Time.DeltaTime;
             

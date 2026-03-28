@@ -14,7 +14,7 @@ namespace EugeneC.ECS {
         public float Speed;
         public float DefaultRestTime;
         public float CurrentRestTime;
-
+        public float DotProduct;
     }
 
     public struct AgentMoveNodeIBuffer : IBufferElementData {
@@ -51,5 +51,6 @@ namespace EugeneC.ECS {
         
         public ushort TotalSpawnCount;
         public ushort CurrentSpawnCount;
+        public ushort SpawnLimit;
     }
 }

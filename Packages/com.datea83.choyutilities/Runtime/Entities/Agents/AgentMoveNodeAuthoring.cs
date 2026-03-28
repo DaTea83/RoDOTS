@@ -48,6 +48,8 @@ namespace EugeneC.ECS {
         private class Baker : Baker<AgentMoveNodeAuthoring> {
 
             public override void Bake(AgentMoveNodeAuthoring authoring) {
+                if (authoring.connections is null || authoring.connections.Length == 0) return;
+                
                 var e = GetEntity(TransformUsageFlags.Renderable);
                 var buffer = AddBuffer<AgentMoveNodeIBuffer>(e);
 

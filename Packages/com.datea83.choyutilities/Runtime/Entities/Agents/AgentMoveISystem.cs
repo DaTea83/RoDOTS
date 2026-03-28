@@ -12,7 +12,7 @@ namespace EugeneC.ECS {
     public partial struct AgentMoveISystem : ISystem {
 
         private const float DistanceThreshold = 0.1f;
-        private const float DotThreshold = 0.98f;
+        private const float DotThreshold = 0.95f;
 
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
@@ -46,14 +46,16 @@ namespace EugeneC.ECS {
 
                 var target = LtwLookup[move.CurrentNode];
                 lt.GetDistanceAndDot(target, out var distanceSqr, out var dot);
+                move.DotProduct = dot;
 
-                if (distanceSqr > DistanceThreshold * DistanceThreshold) {
+                if (distanceSqr > DistanceThreshold) {
+                    var direction = math.normalize(target.Position - lt.Position);
+
                     if (dot < DotThreshold) {
-                        lt.Rotation = math.slerp(lt.Rotation, 
-                            quaternion.LookRotationSafe(target.Position,lt.Up()), Time * AgentMoveSingleton.RotationSpeed);
+                        lt.Rotation = math.slerp(lt.Rotation,
+                            quaternion.LookRotationSafe(direction, lt.Up()), Time * AgentMoveSingleton.RotationSpeed);
                     }
                     else {
-                        var direction = math.normalize(target.Position - lt.Position);
                         lt.Position += direction * move.Speed * Time;
                     }
                 }

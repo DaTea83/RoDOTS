@@ -53,6 +53,11 @@ namespace EugeneC.ECS {
                     Offset = float3.zero,
                     SmoothFollowSpeed = 0
                 });
+                ecb.AddComponent(entity, new ObjTransformICleanup {
+                    Transform = new UnityObjectRef<Transform> {
+                        Value = camTargetTransform
+                    }
+                });
                 ecb.RemoveComponent<InitializeCameraTargetITag>(entity);
             }
 

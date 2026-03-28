@@ -20,12 +20,12 @@ namespace EugeneC.Singleton {
         /// <summary>
         ///     Determines if you want to spawn all prefabs as child on start
         /// </summary>
-        protected abstract bool initializeOnStart { get; }
+        protected abstract bool InitializeOnStart { get; }
 
         /// <summary>
         ///     Turn off collection checking reduce gc pressure, but not thread safe
         /// </summary>
-        protected abstract bool collectionCheck { get; }
+        protected abstract bool CollectionCheck { get; }
 
         protected virtual async void Start() {
             try {
@@ -39,7 +39,7 @@ namespace EugeneC.Singleton {
                     RuntimePools[i].spawn = new TObj[poolCount];
                     Pools[i] = InitPool(poolPrefabs[i].prefab);
 
-                    if (!initializeOnStart) continue;
+                    if (!InitializeOnStart) continue;
 
                     for (var j = 0; j < poolCount; j++) {
                         var spawnObj = Pools[i].Get();
@@ -84,7 +84,7 @@ namespace EugeneC.Singleton {
                 obj => obj.gameObject.SetActive(true),
                 obj => obj.gameObject.SetActive(false),
                 Destroy,
-                collectionCheck,
+                CollectionCheck,
                 poolPrefabs.Length,
                 poolCount
             );
