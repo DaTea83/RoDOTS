@@ -14,7 +14,6 @@ namespace EugeneC.ECS {
         public float Speed;
         public float DefaultRestTime;
         public float CurrentRestTime;
-        public float DotProduct;
     }
 
     public struct AgentMoveNodeIBuffer : IBufferElementData {

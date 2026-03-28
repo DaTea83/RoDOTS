@@ -15,6 +15,7 @@
 
 ### Removed
 * Removed the IDispoable from ObjTransformIData, destroying gameobject will be handled by ICleanupComponent
+* Removed AnimationController
 
 ## [0.1.10] - 2026-03-27
 

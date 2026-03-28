@@ -46,7 +46,6 @@ namespace EugeneC.ECS {
 
                 var target = LtwLookup[move.CurrentNode];
                 lt.GetDistanceAndDot(target, out var distanceSqr, out var dot);
-                move.DotProduct = dot;
 
                 if (distanceSqr > DistanceThreshold) {
                     var direction = math.normalize(target.Position - lt.Position);
