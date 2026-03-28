@@ -39,7 +39,7 @@ namespace EugeneC.Utilities {
             return angle < threshold;
         }
 
-        public static Transform FindNearestWaypoint(this List<Transform> posList, Transform currentPosition) {
+        public static Transform FindNearestTransform(this List<Transform> posList, Transform currentPosition) {
             if (posList is null || currentPosition is null) return null;
 
             Transform nearest = null;
@@ -58,7 +58,7 @@ namespace EugeneC.Utilities {
             return nearest;
         }
 
-        public static Transform FindNearestWaypoint(this List<Transform> posList,
+        public static Transform FindNearestTransform(this List<Transform> posList,
             Transform currentPosition,
             List<Transform> prevPos) {
             if (posList is null || currentPosition is null) return null;
@@ -89,7 +89,7 @@ namespace EugeneC.Utilities {
             return !hitInfo.collider.CompareTag(tag);
         }
 
-        public static Transform FindNearestEnemy(this GameObject bot, List<GameObject> objectList) {
+        public static Transform FindNearestGameObject(this GameObject bot, List<GameObject> objectList) {
             Transform target = null;
             var disToNearest = 0f;
 

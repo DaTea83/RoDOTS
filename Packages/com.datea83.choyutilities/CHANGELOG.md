@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.11] - 2026-03-28
+
+### Added
+* Added AgentSpawnISingleton
+* HelperCollection, added GetDistanceAndDot() extensions
+
+### Changed
+* AgentSpawnISystem, now tracks how many agents are spawned with AgentSpawnISingleton
+* AgentMoveISystem, now before moving towards the target agent it first rotate towards the target
+
 ## [0.1.10] - 2026-03-27
 
 ### Added

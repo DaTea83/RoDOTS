@@ -1,6 +1,7 @@
 using System;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
@@ -70,6 +71,50 @@ namespace EugeneC.Utilities {
                                              (uint)Time.deltaTime);
 
             return ran.NextFloat3();
+        }
+        
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = player.Position - target.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = player.Position - target.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
+        }
+        
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = player.Position - target.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+        
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = player.Position - target.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
         }
 
         public static float3 GetClosestPointInSplineSegment(float3 lineStart, float3 lineEnd,

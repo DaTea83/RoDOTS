@@ -23,9 +23,9 @@ namespace EugeneC.Mono {
 
         public void SetAndSubSystem(UiHandleSystemBase system) {
             UISystem = system;
-            UISystem.OnUiClicked += OnUiClicked;
-            UISystem.OnUiEnterHover += OnUiEnterHover;
-            UISystem.OnUiExitHover += OnUiExitHover;
+            // UISystem.OnUiClicked += OnUiClicked;
+            // UISystem.OnUiEnterHover += OnUiEnterHover;
+            // UISystem.OnUiExitHover += OnUiExitHover;
         }
 
         protected virtual void OnUiExitHover(byte arg1, byte arg2) {

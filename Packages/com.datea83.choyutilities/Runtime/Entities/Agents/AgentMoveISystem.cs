@@ -1,4 +1,5 @@
-﻿using Unity.Burst;
+﻿using EugeneC.Utilities;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -11,6 +12,7 @@ namespace EugeneC.ECS {
     public partial struct AgentMoveISystem : ISystem {
 
         private const float DistanceThreshold = 0.1f;
+        private const float DotThreshold = 0.98f;
 
         [BurstCompile]
         public void OnCreate(ref SystemState state) {
@@ -25,8 +27,7 @@ namespace EugeneC.ECS {
                 AgentMoveSingleton = SystemAPI.GetSingleton<AgentMoveSystemISingleton>(),
                 NodeLookup = SystemAPI.GetBufferLookup<AgentMoveNodeIBuffer>(true),
                 LtwLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
-                Time = SystemAPI.Time.DeltaTime,
-                Threshold = DistanceThreshold,
+                Time = SystemAPI.Time.DeltaTime
                 
             }.ScheduleParallel();
         }
@@ -38,17 +39,23 @@ namespace EugeneC.ECS {
             [ReadOnly] public BufferLookup<AgentMoveNodeIBuffer> NodeLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> LtwLookup;
             public float Time;
-            public float Threshold;
             
             [BurstCompile]
             private void Execute(ref AgentMoveIEnableable move, ref RandomIData random, 
                 ref LocalTransform lt) {
 
                 var target = LtwLookup[move.CurrentNode];
+                lt.GetDistanceAndDot(target, out var distanceSqr, out var dot);
 
-                if (math.distance(lt.Position, target.Position) > Threshold) {
-                    var direction = math.normalize(target.Position - lt.Position);
-                    lt.Position += direction * move.Speed * Time;
+                if (distanceSqr > DistanceThreshold * DistanceThreshold) {
+                    if (dot < DotThreshold) {
+                        lt.Rotation = math.slerp(lt.Rotation, 
+                            quaternion.LookRotationSafe(target.Position,lt.Up()), Time * AgentMoveSingleton.RotationSpeed);
+                    }
+                    else {
+                        var direction = math.normalize(target.Position - lt.Position);
+                        lt.Position += direction * move.Speed * Time;
+                    }
                 }
                 else {
                     if (AgentMoveSingleton.HasRestTime) {
@@ -65,8 +72,6 @@ namespace EugeneC.ECS {
                     var nextNode = node[index].ConnectedNode;
 
                     move.CurrentNode = nextNode;
-                    var nodeLtw = LtwLookup[nextNode];
-                    lt.Rotation = quaternion.LookRotation(nodeLtw.Position, lt.Up());
                 }
             }
         }

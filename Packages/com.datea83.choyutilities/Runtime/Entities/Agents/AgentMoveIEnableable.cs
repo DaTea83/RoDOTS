@@ -38,11 +38,18 @@ namespace EugeneC.ECS {
 
     public struct AgentMoveSystemISingleton : IComponentData {
         
+        public float RotationSpeed;
         public float MinSpeed;
         public float MaxSpeed;
         public float MinRestTime;
         public float MaxRestTime;
         public bool HasRestTime;
 
+    }
+    
+    public struct AgentSpawnISingleton : IComponentData {
+        
+        public ushort TotalSpawnCount;
+        public ushort CurrentSpawnCount;
     }
 }
