@@ -27,11 +27,6 @@ namespace EugeneC.ECS {
                     Offset = authoring.targetOffset,
                     SmoothFollowSpeed = authoring.smoothFollowSpeed
                 });
-                AddComponent(entity, new ObjTransformICleanup {
-                    Transform = new UnityObjectRef<Transform> {
-                        Value = authoring.target
-                    }
-                });
             }
 
         }
@@ -46,10 +41,6 @@ namespace EugeneC.ECS {
         public UnityObjectRef<Transform> Transform;
         public float3 Offset;
         public float SmoothFollowSpeed;
-    }
-
-    public struct ObjTransformICleanup : ICleanupComponentData {
-        public UnityObjectRef<Transform> Transform;
     }
 
     [UpdateInGroup(typeof(Eu_PostTransformSystemGroup), OrderFirst = true)]
@@ -71,27 +62,5 @@ namespace EugeneC.ECS {
             }
         }
 
-    }
-
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
-    public partial struct ObjTransformCleanupISystem : ISystem {
-        
-        public void OnUpdate(ref SystemState state) {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-        
-            foreach (var (cleanup, entity) 
-                     in SystemAPI.Query<RefRO<ObjTransformICleanup>>()
-                         .WithNone<ObjTransformIData>()
-                         .WithEntityAccess()) {
-            
-                if (cleanup.ValueRO.Transform.Value is not null) {
-                    UnityEngine.Object.Destroy(cleanup.ValueRO.Transform.Value.gameObject);
-                }
-                ecb.RemoveComponent<ObjTransformICleanup>(entity);
-            }
-        
-            ecb.Playback(state.EntityManager);
-            ecb.Dispose();
-        }
     }
 }

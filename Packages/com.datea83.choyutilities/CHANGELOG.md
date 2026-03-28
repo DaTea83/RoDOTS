@@ -7,7 +7,7 @@
 * HelperCollection, added GetDistanceAndDot() extensions
 * Added GameObjectAuthoring
 * Added InitializeAnimatorAuthoring
-* Added ObjTransformICleanup
+* Added AnimatorTransformICleanup
 
 ### Changed
 * AgentSpawnISystem, now tracks how many agents are spawned with AgentSpawnISingleton

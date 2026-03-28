@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Unity.Collections;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -31,6 +32,10 @@ namespace EugeneC.ECS {
     public struct AnimatorIData : IComponentData {
         public UnityObjectRef<Animator> Animator;
     }
+
+    public struct AnimatorICleanup : ICleanupComponentData {
+        public UnityObjectRef<Animator> Animator;
+    }
     
     public struct InitializeAnimatorITag :  IComponentData {}
 
@@ -50,9 +55,9 @@ namespace EugeneC.ECS {
                     SmoothFollowSpeed = 0,
                     Offset = float3.zero
                 });
-                ecb.AddComponent(entity, new ObjTransformICleanup {
-                    Transform = new UnityObjectRef<Transform> {
-                        Value = instance.transform
+                ecb.AddComponent(entity, new AnimatorICleanup {
+                    Animator = new UnityObjectRef<Animator> {
+                        Value = instance.GetComponent<Animator>()
                     }
                 });
                 ecb.AddComponent(entity, new AnimatorIData {
@@ -62,6 +67,28 @@ namespace EugeneC.ECS {
                 ecb.RemoveComponent<InitializeAnimatorITag>(entity);
             }
             ecb.Playback(state.EntityManager);
+        }
+    }
+
+    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
+    public partial struct CleanupAnimatorISystem : ISystem {
+        
+        public void OnUpdate(ref SystemState state) {
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+        
+            foreach (var (cleanup, entity) 
+                     in SystemAPI.Query<RefRO<AnimatorICleanup>>()
+                         .WithNone<ObjTransformIData>()
+                         .WithEntityAccess()) {
+            
+                if (cleanup.ValueRO.Animator.Value is not null) {
+                    Object.Destroy(cleanup.ValueRO.Animator.Value.gameObject);
+                }
+                ecb.RemoveComponent<AnimatorICleanup>(entity);
+            }
+        
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
         }
     }
 }
