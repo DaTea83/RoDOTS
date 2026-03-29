@@ -15,7 +15,7 @@ namespace RoDOTS.runtime {
         private int _doAttack;
         
         public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<AgentMoveSystemISingleton>();
+            state.RequireForUpdate<AgentSpawnISingleton>();
             
             _movement = Animator.StringToHash("F_Movement");
             _isDead = Animator.StringToHash("IsDead");
@@ -24,10 +24,10 @@ namespace RoDOTS.runtime {
         }
 
         public void OnUpdate(ref SystemState state) {
-            var singleton = SystemAPI.GetSingleton<AgentMoveSystemISingleton>();
 
-            foreach (var (robot, move, anim, ltw) 
-                     in SystemAPI.Query<RefRW<RobotIData>,RefRO<AgentMoveIEnableable>
+            foreach (var (robot, move, stats,
+                         anim, ltw) 
+                     in SystemAPI.Query<RefRW<RobotIData>,RefRO<AgentMoveIEnableable>, RefRO<AgentStatsIData>
                          ,RefRW<AnimatorIData>, RefRO<LocalToWorld>>()) {
                 
                 robot.ValueRW.PreviousPosition = robot.ValueRW.CurrentPosition;
@@ -37,7 +37,7 @@ namespace RoDOTS.runtime {
                 var length = math.length(delta);
                 var animator = anim.ValueRW.Animator.Value;
                 
-                animator.SetFloat(_movement, move.ValueRO.Speed * length / singleton.MinSpeed );
+                animator.SetFloat(_movement, stats.ValueRO.MoveSpeed * length);
             }
         }
     }

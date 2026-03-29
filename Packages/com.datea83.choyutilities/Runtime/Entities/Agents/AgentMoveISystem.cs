@@ -15,16 +15,10 @@ namespace EugeneC.ECS {
         private const float DotThreshold = 0.95f;
 
         [BurstCompile]
-        public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<AgentMoveSystemISingleton>();
-        }
-
-        [BurstCompile]
         public void OnUpdate(ref SystemState state) {
             
             new AgentMoveIJob {
                 
-                AgentMoveSingleton = SystemAPI.GetSingleton<AgentMoveSystemISingleton>(),
                 NodeLookup = SystemAPI.GetBufferLookup<AgentMoveNodeIBuffer>(true),
                 LtwLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
                 Time = SystemAPI.Time.DeltaTime
@@ -34,14 +28,15 @@ namespace EugeneC.ECS {
 
         [BurstCompile]
         public partial struct AgentMoveIJob : IJobEntity {
-
-            [ReadOnly] public AgentMoveSystemISingleton AgentMoveSingleton;
+            
             [ReadOnly] public BufferLookup<AgentMoveNodeIBuffer> NodeLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> LtwLookup;
             public float Time;
             
             [BurstCompile]
-            private void Execute(ref AgentMoveIEnableable move, ref RandomIData random, 
+            private void Execute(ref AgentMoveIEnableable move, 
+                ref AgentStatsIData stats, 
+                ref RandomIData random, 
                 ref LocalTransform lt) {
 
                 var target = LtwLookup[move.CurrentNode];
@@ -52,16 +47,16 @@ namespace EugeneC.ECS {
 
                     if (dot < DotThreshold) {
                         lt.Rotation = math.slerp(lt.Rotation,
-                            quaternion.LookRotationSafe(direction, lt.Up()), Time * AgentMoveSingleton.RotationSpeed);
+                            quaternion.LookRotationSafe(direction, lt.Up()), Time * stats.RotationSpeed);
                     }
                     else {
-                        lt.Position += direction * move.Speed * Time;
+                        lt.Position += direction * stats.MoveSpeed * Time;
                     }
                 }
                 else {
-                    if (AgentMoveSingleton.HasRestTime) {
+                    if (stats.HasRestTime) {
                         move.CurrentRestTime += Time;
-                        if(move.CurrentRestTime < move.DefaultRestTime) return;
+                        if(move.CurrentRestTime < stats.RestTime) return;
                         move.CurrentRestTime = 0;
                     }
 

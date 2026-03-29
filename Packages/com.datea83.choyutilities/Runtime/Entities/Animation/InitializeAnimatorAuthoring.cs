@@ -48,7 +48,7 @@ namespace EugeneC.ECS {
             foreach (var (obj, entity) in 
                      SystemAPI.Query<RefRO<GameObjectIData>>()
                          .WithAll<InitializeAnimatorITag>().WithEntityAccess()) {
-                
+                 
                 var instance = Object.Instantiate(obj.ValueRO.Prefab.Value.gameObject);
                 ecb.AddComponent(entity, new ObjTransformIData {
                     Transform = instance.transform,

@@ -17,7 +17,7 @@ namespace EugeneC.ObsoleteV2 {
 
                 AddComponent(e, new AgentMovementIData {
                     PathwayId = (byte)authoring.AgentEnum,
-                    Speed = authoring.stats.speed
+                    Speed = authoring.stats.MoveSpeed
                 });
             }
 

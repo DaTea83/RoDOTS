@@ -23,6 +23,7 @@ namespace RoDOTS.runtime
     }
     
     public struct RobotIData : IComponentData {
+        public Entity ClosestEnemy;
         public float3 CurrentPosition;
         public float3 PreviousPosition;
         public ushort DefaultHealth;

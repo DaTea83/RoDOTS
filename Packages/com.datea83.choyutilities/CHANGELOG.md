@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.1.11] - 2026-03-28
+## [0.1.11] - 2026-03-28/29
 
 ### Added
 * Added AgentSpawnISingleton
@@ -8,6 +8,7 @@
 * Added GameObjectAuthoring
 * Added InitializeAnimatorAuthoring
 * Added AnimatorTransformICleanup
+* Added AgentStatsAuthoring
 
 ### Changed
 * AgentSpawnISystem, now tracks how many agents are spawned with AgentSpawnISingleton
@@ -16,6 +17,7 @@
 ### Removed
 * Removed the IDispoable from ObjTransformIData, destroying gameobject will be handled by ICleanupComponent
 * Removed AnimationController
+* Removed AgentMoveISingleton
 
 ## [0.1.10] - 2026-03-27
 

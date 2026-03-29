@@ -11,11 +11,9 @@ namespace EugeneC.ECS {
     public class AgentSpawnNodeAuthoring : MonoBehaviour {
 
         //Prefabs must have the DestroyIData component
-        [SerializeField] private DestroyAuthoring[] spawnPrefabs;
+        [SerializeField] private AgentStatsAuthoring[] spawnPrefabs;
         [SerializeField] private bool spawnOnce;
         [SerializeField][Min(0.01f)] private float delay = 1f;
-        [Tooltip("0 and below means it doesn't despawn")]
-        [SerializeField] private float spawnExistTime = 60f;
         
         private class AgentSpawnNodeAuthoringBaker : Baker<AgentSpawnNodeAuthoring> {
 
@@ -26,13 +24,14 @@ namespace EugeneC.ECS {
 
                 foreach (var prefab in authoring.spawnPrefabs) {
                     DependsOn(prefab);
-                    buffer.Add(new AgentSpawnIBuffer { Prefab = GetEntity(prefab.gameObject, TransformUsageFlags.Dynamic) });
+                    buffer.Add(new AgentSpawnIBuffer {
+                        Prefab = GetEntity(prefab.gameObject, TransformUsageFlags.Dynamic)
+                    });
                 }
                 
                 AddComponent(e, new AgentSpawnNodeIData {
                     SpawnOnce = authoring.spawnOnce,
                     DefaultSpawnDelay = authoring.delay,
-                    ExistTime = authoring.spawnExistTime,
                 });
             }
         }
@@ -58,7 +57,7 @@ namespace EugeneC.ECS {
             var et = SystemAPI.Time.ElapsedTime;
             var dt = SystemAPI.Time.DeltaTime;
             
-            foreach (var (spawn, buffer,ltw, entity)
+            foreach (var (spawn, buffer, ltw, entity)
                      in SystemAPI.Query<RefRW<AgentSpawnNodeIData>, DynamicBuffer<AgentSpawnIBuffer>, RefRO<LocalToWorld>>()
                          .WithEntityAccess()) {
                 
@@ -73,9 +72,9 @@ namespace EugeneC.ECS {
                 
                 ecb.AddComponent(newEntity, new InitializeAgentIData {
                     Spawn = entity,
-                    ExistTime = spawn.ValueRO.ExistTime,
                 });
-                ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(ltw.ValueRO.Position, ltw.ValueRO.Rotation));
+                ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(
+                    ltw.ValueRO.Position, ltw.ValueRO.Rotation));
                 
                 if (spawn.ValueRO.SpawnOnce) {
                     ecb.RemoveComponent<AgentMoveIEnableable>(entity);

@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: EugeneC::EugeneC.ECS.AgentSpawnNodeAuthoring
   spawnPrefabs:
-  - {fileID: 591594649161833082, guid: 8c6130e935b794a4e80ccb8fcb04322e, type: 3}
+  - {fileID: 4320186851115218650, guid: 8c6130e935b794a4e80ccb8fcb04322e, type: 3}
   spawnOnce: 1
   delay: 1
   spawnExistTime: 20
@@ -1077,12 +1077,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26839d6ce174c60842f66ce58692712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EugeneC::EugeneC.ECS.AgentMoveSystemAuthoring
-  rotateSpeed: 3
-  minSpeed: 1
-  maxSpeed: 10
-  hasRestTime: 1
-  minRestTime: 1
-  maxRestTime: 5
   spawnLimit: 0
 --- !u!4 &1024336496
 Transform:
@@ -1352,7 +1346,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 226521393562766163}
   - {fileID: 1053195460}
   - {fileID: 2087784393}
   - {fileID: 1346965586}
@@ -3035,68 +3028,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087784392}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &226521393562766162
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1171093346}
-    m_Modifications:
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5460366011406439534, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-      propertyPath: m_Name
-      value: Plane
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
---- !u!4 &226521393562766163 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2368502032947665950, guid: 60dc72f0e85ef8a498a448e39a79f408, type: 3}
-  m_PrefabInstance: {fileID: 226521393562766162}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
