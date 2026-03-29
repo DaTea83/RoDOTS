@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349ce8b22b0549ceb279d2752dc0a0e4, type: 3}
+  m_Name: Move_Type2
+  m_EditorClassIdentifier: EugeneC::EugeneC.Utilities.AgentAttributes
+  MoveSpeed: 10
+  RotationSpeed: 3
+  HasRestTime: 0
+  RestTime: 0.5
+  ExistTime: 0

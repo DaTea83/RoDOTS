@@ -64,6 +64,7 @@ namespace EugeneC.ECS {
                     Animator = instance.GetComponent<Animator>(),
                 });
                 
+                ecb.RemoveComponent<GameObjectIData>(entity);
                 ecb.RemoveComponent<InitializeAnimatorITag>(entity);
             }
             ecb.Playback(state.EntityManager);
