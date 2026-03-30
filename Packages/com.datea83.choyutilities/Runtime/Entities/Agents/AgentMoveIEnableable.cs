@@ -25,11 +25,6 @@ namespace EugeneC.ECS {
 
         public Entity Prefab;
     }
-
-    public struct SpawnNodeTagIData : IComponentData {
-
-	    public byte Id;
-    }
     
     public struct SpawnNodeIEnableable : IComponentData, IEnableableComponent {
         

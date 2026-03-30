@@ -84,6 +84,27 @@ namespace EugeneC.Singleton {
 
             return !validSingleton ? throw new Exception("Singleton not found") : singleton;
         }
+        
+        protected async Awaitable<DynamicBuffer<TBuffer>> GetSingletonBuffer<TBuffer>()
+	        where TBuffer : unmanaged, IBufferElementData {
+	        var query = World.EntityManager.CreateEntityQuery(
+		        ComponentType.ReadOnly<TBuffer>());
+
+	        DynamicBuffer<TBuffer> buffer = default;
+	        var validSingleton = false;
+	        var frame = 0;
+
+	        while (frame < MAX_FRAME) {
+		        validSingleton = query.TryGetSingletonBuffer(out buffer);
+
+		        if (validSingleton) break;
+		        Debug.Log($"{gameObject.name} is waiting for buffer at frame at {frame}");
+		        frame++;
+		        await Awaitable.NextFrameAsync(Token);
+	        }
+
+	        return !validSingleton ? throw new Exception("Buffer not found") : buffer;
+        }
 
         #endregion
 

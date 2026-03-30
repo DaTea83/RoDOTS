@@ -14,6 +14,7 @@ namespace EugeneC.ECS {
         //Prefabs must have the DestroyIData component
         [SerializeField] private AgentStatsAuthoring[] spawnPrefabs;
         [SerializeField] private bool spawnOnce;
+        [SerializeField] private bool disabledOnStart;
         [SerializeField][Min(0.01f)] private float delay = 1f;
         
         private class Baker : Baker<SpawnNodeAuthoring> {
@@ -34,6 +35,9 @@ namespace EugeneC.ECS {
                     SpawnOnce = authoring.spawnOnce,
                     DefaultSpawnDelay = authoring.delay,
                 });
+                
+                if(authoring.disabledOnStart)
+	                SetComponentEnabled<SpawnNodeIEnableable>(e, false);
             }
         }
     }

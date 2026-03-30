@@ -5,7 +5,8 @@
 ### Added
 * Added AgentMoveICleanupTag
 * Added CleanupAgentMoveISystem
-* Added GroupTagAuthoring
+* Added GroupTagAuthoring,
+* GenericSingleton, added GetSingletonBuffer
 
 ### Changed
 * Renamed Entities/Animations to Entities/GameObjects

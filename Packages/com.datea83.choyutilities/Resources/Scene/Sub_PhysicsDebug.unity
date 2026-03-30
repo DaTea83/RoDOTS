@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DrawColliders: 0
-  DrawColliderEdges: 1
+  DrawColliderEdges: 0
   DrawColliderAabbs: 1
   DrawMassProperties: 0
   DrawBroadphase: 0
