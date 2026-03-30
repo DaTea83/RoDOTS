@@ -9,9 +9,9 @@ using UnityEditor;
 namespace EugeneC.ECS {
 
     [DisallowMultipleComponent]
-    public class AgentMoveNodeAuthoring : MonoBehaviour {
+    public class MoveNodeAuthoring : MonoBehaviour {
 
-        [SerializeField] private AgentMoveNodeAuthoring[] connections;
+        [SerializeField] private MoveNodeAuthoring[] connections;
         
 #if UNITY_EDITOR        
         [Header("Gizmos")]
@@ -45,17 +45,17 @@ namespace EugeneC.ECS {
         }
 #endif
 
-        private class Baker : Baker<AgentMoveNodeAuthoring> {
+        private class Baker : Baker<MoveNodeAuthoring> {
 
-            public override void Bake(AgentMoveNodeAuthoring authoring) {
+            public override void Bake(MoveNodeAuthoring authoring) {
                 if (authoring.connections is null || authoring.connections.Length == 0) return;
                 
                 var e = GetEntity(TransformUsageFlags.Renderable);
-                var buffer = AddBuffer<AgentMoveNodeIBuffer>(e);
+                var buffer = AddBuffer<ConnectedNodeIBuffer>(e);
 
                 foreach (var c in authoring.connections) {
                     DependsOn(c);
-                    buffer.Add(new AgentMoveNodeIBuffer { ConnectedNode = GetEntity(c, TransformUsageFlags.Renderable) });
+                    buffer.Add(new ConnectedNodeIBuffer { ConnectedNode = GetEntity(c, TransformUsageFlags.Renderable) });
                 }
             }
         }

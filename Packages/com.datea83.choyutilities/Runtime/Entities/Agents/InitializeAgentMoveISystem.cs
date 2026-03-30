@@ -21,6 +21,7 @@ namespace EugeneC.ECS {
 
                 if (stats.ValueRO.ExistTime > 0) {
                     ecb.AddComponent(entity, new DestroyTimeIData{ Value = stats.ValueRO.ExistTime});
+                    ecb.AddComponent(entity, new AgentMoveICleanupTag());
                 }
                 
                 ecb.AddComponent<RandomIData>(entity);

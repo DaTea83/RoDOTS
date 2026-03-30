@@ -19,7 +19,7 @@ namespace EugeneC.ECS {
             
             new AgentMoveIJob {
                 
-                NodeLookup = SystemAPI.GetBufferLookup<AgentMoveNodeIBuffer>(true),
+                NodeLookup = SystemAPI.GetBufferLookup<ConnectedNodeIBuffer>(true),
                 LtwLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
                 Time = SystemAPI.Time.DeltaTime
                 
@@ -29,7 +29,7 @@ namespace EugeneC.ECS {
         [BurstCompile]
         public partial struct AgentMoveIJob : IJobEntity {
             
-            [ReadOnly] public BufferLookup<AgentMoveNodeIBuffer> NodeLookup;
+            [ReadOnly] public BufferLookup<ConnectedNodeIBuffer> NodeLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> LtwLookup;
             public float Time;
             

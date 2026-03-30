@@ -15,7 +15,7 @@ namespace RoDOTS.runtime {
         private int _doAttack;
         
         public void OnCreate(ref SystemState state) {
-            state.RequireForUpdate<AgentSpawnISingleton>();
+            state.RequireForUpdate<AgentISingleton>();
             
             _movement = Animator.StringToHash("F_Movement");
             _isDead = Animator.StringToHash("IsDead");

@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.12] - 2026-03-30
+
+### Added
+* Added AgentMoveICleanupTag
+* Added CleanupAgentMoveISystem
+* Added GroupTagAuthoring
+
+### Changed
+* Renamed Entities/Animations to Entities/GameObjects
+* Renamed AgentMoveNodeIBuffer to ConnectedNodeIBuffer
+* Renamed AgentSpawnNodeAuthoring to SpawnNodeAuthroing
+* Renamed AgentMoveNodeAuthoring to MoveNodeAuthoring
+* Renamed AgentSpawnIBuffer to SpawnNodeIBuffer
+* Renamed AgentSpawnNodeIData to SpawnNodeIEnableable
+* Renamed AgentSpawnISingleton to AgentISingleton
+* Renamed InitializeAnimatorISystem to InitialzeObjectAnimatorISystem
+
 ## [0.1.11] - 2026-03-28/29
 
 ### Added

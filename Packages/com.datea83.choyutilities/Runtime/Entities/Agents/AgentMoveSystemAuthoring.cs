@@ -13,7 +13,7 @@ namespace EugeneC.ECS {
             public override void Bake(AgentMoveSystemAuthoring authoring) {
                 var e = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent(e, new AgentSpawnISingleton {
+                AddComponent(e, new AgentISingleton {
                     SpawnLimit = authoring.spawnLimit
                 });
             }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1554588250002282628}
   - component: {fileID: 5899862874897283125}
   - component: {fileID: 4320186851115218650}
+  - component: {fileID: 6721436361437382143}
   m_Layer: 0
   m_Name: Robot_Soldiers_1
   m_TagString: Untagged
@@ -124,6 +125,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: EugeneC::EugeneC.ECS.AgentStatsAuthoring
   attributes: {fileID: 11400000, guid: 7503182425542924282940c8b44b6b68, type: 2}
+--- !u!114 &6721436361437382143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361170961238616829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &692296810990272113
 GameObject:
   m_ObjectHideFlags: 0
