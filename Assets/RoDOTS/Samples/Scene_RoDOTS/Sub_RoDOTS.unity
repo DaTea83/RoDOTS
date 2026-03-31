@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 914795077}
   - component: {fileID: 914795079}
   - component: {fileID: 914795078}
+  - component: {fileID: 914795080}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -866,8 +867,8 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 8c6130e935b794a4e80ccb8fcb04322e, type: 3}
   spawnOnce: 1
+  disabledOnStart: 0
   delay: 1
-  spawnExistTime: 20
 --- !u!114 &914795079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,6 +887,19 @@ MonoBehaviour:
   connectionWidth: 20
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
   nodeRadius: 1
+--- !u!114 &914795080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914795076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &933431077
 GameObject:
   m_ObjectHideFlags: 0

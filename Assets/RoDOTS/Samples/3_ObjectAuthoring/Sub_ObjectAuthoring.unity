@@ -569,6 +569,7 @@ GameObject:
   - component: {fileID: 369379453}
   - component: {fileID: 369379455}
   - component: {fileID: 369379454}
+  - component: {fileID: 369379456}
   m_Layer: 0
   m_Name: Node 1
   m_TagString: Untagged
@@ -606,6 +607,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 9029d04d4f933954bbd84c308dd184dc, type: 3}
   spawnOnce: 0
+  disabledOnStart: 0
   delay: 0.5
 --- !u!114 &369379455
 MonoBehaviour:
@@ -625,6 +627,19 @@ MonoBehaviour:
   connectionWidth: 20
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
   nodeRadius: 1
+--- !u!114 &369379456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369379452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &380478684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1025,7 @@ GameObject:
   - component: {fileID: 944212328}
   - component: {fileID: 944212330}
   - component: {fileID: 944212329}
+  - component: {fileID: 944212331}
   m_Layer: 0
   m_Name: Node 1
   m_TagString: Untagged
@@ -1047,6 +1063,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 9029d04d4f933954bbd84c308dd184dc, type: 3}
   spawnOnce: 0
+  disabledOnStart: 0
   delay: 2
 --- !u!114 &944212330
 MonoBehaviour:
@@ -1066,6 +1083,19 @@ MonoBehaviour:
   connectionWidth: 20
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
   nodeRadius: 1
+--- !u!114 &944212331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944212327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &970780303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,6 +1257,7 @@ GameObject:
   - component: {fileID: 1169032070}
   - component: {fileID: 1169032069}
   - component: {fileID: 1169032068}
+  - component: {fileID: 1169032071}
   m_Layer: 0
   m_Name: Node 1
   m_TagString: Untagged
@@ -1249,6 +1280,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 9029d04d4f933954bbd84c308dd184dc, type: 3}
   spawnOnce: 0
+  disabledOnStart: 0
   delay: 8
 --- !u!114 &1169032069
 MonoBehaviour:
@@ -1283,6 +1315,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2107706047}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1169032071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169032067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &1418203715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,6 +1676,7 @@ GameObject:
   - component: {fileID: 1962519067}
   - component: {fileID: 1962519069}
   - component: {fileID: 1962519068}
+  - component: {fileID: 1962519070}
   m_Layer: 0
   m_Name: Node 1
   m_TagString: Untagged
@@ -1668,6 +1714,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 9029d04d4f933954bbd84c308dd184dc, type: 3}
   spawnOnce: 0
+  disabledOnStart: 0
   delay: 1
 --- !u!114 &1962519069
 MonoBehaviour:
@@ -1687,6 +1734,19 @@ MonoBehaviour:
   connectionWidth: 20
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
   nodeRadius: 1
+--- !u!114 &1962519070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962519066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &1980543123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1758,7 @@ GameObject:
   - component: {fileID: 1980543124}
   - component: {fileID: 1980543126}
   - component: {fileID: 1980543125}
+  - component: {fileID: 1980543127}
   m_Layer: 0
   m_Name: Node 1
   m_TagString: Untagged
@@ -1735,6 +1796,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4320186851115218650, guid: 9029d04d4f933954bbd84c308dd184dc, type: 3}
   spawnOnce: 0
+  disabledOnStart: 0
   delay: 4
 --- !u!114 &1980543126
 MonoBehaviour:
@@ -1754,6 +1816,19 @@ MonoBehaviour:
   connectionWidth: 20
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
   nodeRadius: 1
+--- !u!114 &1980543127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980543123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d897675b5ea1427aa7aae165b755dda1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EugeneC::EugeneC.ECS.GroupTagAuthoring
+  idTag: 255
 --- !u!1 &1995207371
 GameObject:
   m_ObjectHideFlags: 0
