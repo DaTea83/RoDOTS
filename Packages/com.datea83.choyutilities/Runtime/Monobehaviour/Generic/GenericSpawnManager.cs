@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 namespace EugeneC.Singleton {
 
     public abstract class GenericSpawnManager<TEnum, TMono> : GenericPoolingManager<TEnum, Component, TMono>
-        where TEnum : Enum
+        where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
         private List<(Component obj, TEnum id)> _spawnedObjects;

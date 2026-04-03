@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.14] - 2026-04-03
+
+### Fixed
+* GenericPoolingManager, GenericAudioManager, GenericLegacyUIManager, now manually sets the siblings index of each spawned object
+
 ## [0.1.13] - 2026-04-01
 
 ### Fixed

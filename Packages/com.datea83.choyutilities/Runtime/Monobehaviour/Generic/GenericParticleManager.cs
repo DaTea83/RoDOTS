@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 namespace EugeneC.Singleton {
 
     public abstract class GenericParticleManager<TEnum, TMono> : GenericPoolingManager<TEnum, ParticleSystem, TMono>
-        where TEnum : Enum
+        where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
         protected override void Awake() {

@@ -6,7 +6,7 @@ using UnityEngine.Pool;
 namespace EugeneC.Singleton {
 
     public abstract class GenericPoolingManager<TEnum, TObj, TMono> : GenericSingleton<TMono>
-        where TEnum : Enum
+        where TEnum : struct, Enum
         where TObj : Component
         where TMono : MonoBehaviour {
 
@@ -43,6 +43,7 @@ namespace EugeneC.Singleton {
 
                     for (var j = 0; j < poolCount; j++) {
                         var spawnObj = Pools[i].Get();
+                        spawnObj.gameObject.transform.SetSiblingIndex(j);
                         RuntimePools[i].spawn[j] = spawnObj;
                     }
                 }

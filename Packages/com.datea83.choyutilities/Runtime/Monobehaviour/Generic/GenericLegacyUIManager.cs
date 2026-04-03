@@ -6,10 +6,9 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 namespace EugeneC.Singleton {
-
-    //TODO
-    public abstract class GenericWorldUiManager<TEnum, TMono> : GenericPoolingManager<TEnum, UiHelper, TMono>
-        where TEnum : Enum
+    
+    public abstract class GenericLegacyUIManager<TEnum, TMono> : GenericPoolingManager<TEnum, UiHelper, TMono>
+        where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
         [SerializeField] protected Canvas canvasRef;
@@ -38,10 +37,6 @@ namespace EugeneC.Singleton {
                     // Initialize the pool
                     Pools[i] = InitPool(() => {
                         var spawn = Instantiate(poolPrefabs[id].prefab, CanvasPos);
-                        spawn.OnSpawn();
-                        RuntimePools[id].spawn[0] = spawn;
-                        spawn.gameObject.SetActive(false);
-
                         return spawn;
                     });
                 }
@@ -75,7 +70,10 @@ namespace EugeneC.Singleton {
         protected virtual void ForcedNewInstance() {
             for (var i = 0; i < poolPrefabs.Length; i++) {
                 var spawnUi = Pools[i].Get();
+                spawnUi.gameObject.transform.SetSiblingIndex(i);
+                spawnUi.OnSpawn();
                 RuntimePools[i].spawn[0] = spawnUi;
+                spawnUi.gameObject.SetActive(false);
             }
         }
 

@@ -8,7 +8,7 @@ using UnityEngine.Pool;
 namespace EugeneC.Singleton {
 
     public abstract class GenericAudioManager<TEnum, TMono> : GenericPoolingManager<TEnum, AudioSource, TMono>
-        where TEnum : Enum
+        where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
         public enum EAudioPriority : byte {
@@ -53,19 +53,16 @@ namespace EugeneC.Singleton {
                 Pools = new ObjectPool<AudioSource>[1];
                 RuntimePools = new RuntimePoolSerialize[1];
 
-                Pools[0] = InitPool(() => {
-                    var spawn = Instantiate(audioSourcePrefab, transform);
-                    spawn.loop = loop;
-                    spawn.outputAudioMixerGroup = masterAudioMixerGroup.mixer.outputAudioMixerGroup;
-                    spawn.priority = (int)priority;
-
-                    return spawn;
-                });
+                Pools[0] = InitPool(audioSourcePrefab);
 
                 RuntimePools[0].spawn = new AudioSource[poolCount];
 
                 for (var i = 0; i < poolCount; i++) {
                     var spawnAudio = Pools[0].Get();
+                    spawnAudio.gameObject.transform.SetSiblingIndex(i);
+                    spawnAudio.loop = loop;
+                    spawnAudio.outputAudioMixerGroup = masterAudioMixerGroup.mixer.outputAudioMixerGroup;
+                    spawnAudio.priority = (int)priority;
                     RuntimePools[0].spawn[i] = spawnAudio;
                 }
 
