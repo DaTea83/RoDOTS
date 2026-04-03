@@ -16,4 +16,4 @@ MonoBehaviour:
   RotationSpeed: 3
   HasRestTime: 0
   RestTime: 0.5
-  ExistTime: 0
+  ExistTime: 60

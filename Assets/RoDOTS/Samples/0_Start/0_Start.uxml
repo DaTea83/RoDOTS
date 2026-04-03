@@ -1,25 +1,14 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd"
-         editor-extension-mode="False">
-    <ui:VisualElement name="TitleContainer"
-                      style="flex-grow: 1; align-content: flex-start; align-items: center; top: 10%; bottom: auto; left: 15%; right: auto; width: 70%; height: 40%; aspect-ratio: auto; flex-wrap: wrap; flex-direction: row; position: absolute; align-self: flex-end; justify-content: center; display: flex; overflow: hidden; -unity-background-scale-mode: scale-to-fit;">
-        <ui:Label text="Label" name="Title"
-                  style="height: 322px; width: 973px; -unity-text-align: middle-center; -unity-font-style: bold; font-size: 80%; -unity-background-scale-mode: scale-to-fit;"/>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="TitleContainer" style="flex-grow: 1; align-content: flex-start; align-items: center; top: 10%; bottom: auto; left: 15%; right: auto; width: 70%; height: 40%; aspect-ratio: auto; flex-wrap: wrap; flex-direction: row; position: absolute; align-self: flex-end; justify-content: center; display: flex; overflow: hidden; -unity-background-scale-mode: scale-to-fit;">
+        <ui:Label text="RoDOTS" name="Title" style="height: 322px; width: 973px; -unity-text-align: middle-center; -unity-font-style: bold; font-size: 80%; -unity-background-scale-mode: scale-to-fit; -unity-font-definition: resource(&quot;Fonts/Zen_Dots/ZenDots-Regular&quot;);"/>
     </ui:VisualElement>
-    <ui:VisualElement name="ButtonContainer"
-                      style="flex-grow: 1; top: 50%; left: 10%; bottom: 10%; right: 10%; position: absolute; justify-content: center; align-items: stretch; align-self: auto; align-content: center; flex-wrap: wrap; flex-direction: row; background-color: rgba(8, 50, 166, 0); -unity-background-scale-mode: scale-to-fit;">
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
-        <ui:Button text="1" selectable="true"
-                   style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+    <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; top: 50%; left: 10%; bottom: 10%; right: 10%; position: absolute; justify-content: center; align-items: stretch; align-self: auto; align-content: center; flex-wrap: wrap; flex-direction: row; background-color: rgba(8, 50, 166, 0); -unity-background-scale-mode: scale-to-fit;">
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
+        <ui:Button text="1" selectable="true" style="height: 116px; width: 419px; align-self: center; align-content: flex-start; justify-content: flex-end; align-items: stretch; background-color: rgb(65, 70, 111); -unity-font-style: bold; font-size: 60%; color: rgb(233, 233, 233);"/>
     </ui:VisualElement>
 </ui:UXML>
