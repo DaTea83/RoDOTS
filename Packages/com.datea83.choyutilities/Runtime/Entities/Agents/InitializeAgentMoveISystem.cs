@@ -3,7 +3,7 @@ using Unity.Entities;
 
 namespace EugeneC.ECS {
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitializeAgentMoveISystem : ISystem {
 
         [BurstCompile]

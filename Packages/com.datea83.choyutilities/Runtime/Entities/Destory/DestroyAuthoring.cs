@@ -21,7 +21,7 @@ namespace EugeneC.ECS {
 
     public struct DestroyIEnableableTag : IComponentData, IEnableableComponent { }
 
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup), OrderLast = true)]
+    [UpdateInGroup(typeof(EuCDestroySystemGroup), OrderLast = true)]
     [BurstCompile]
     public partial struct DestroyEntityISystem : ISystem {
 

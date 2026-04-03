@@ -6,8 +6,7 @@ namespace EugeneC.ECS {
     /// <summary>
     ///     If the entity is destroyed, destroy the animator
     /// </summary>
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
-    [UpdateAfter(typeof(DestroyEntityISystem))]
+    [UpdateInGroup(typeof(EuCCleanupSystemGroup))]
     public partial struct CleanupAnimatorISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

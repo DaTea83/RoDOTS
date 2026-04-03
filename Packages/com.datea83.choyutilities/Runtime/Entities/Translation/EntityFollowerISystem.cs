@@ -16,7 +16,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_PostTransformSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(EuCPostTransformSystemGroup), OrderFirst = true)]
     public partial struct EntityFollowerISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {
@@ -45,7 +45,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitialDestroyFollowerISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

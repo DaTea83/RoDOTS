@@ -46,8 +46,7 @@ namespace EugeneC.ECS {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
-    [UpdateBefore(typeof(InitializeAgentMoveISystem))]
+    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct AgentSpawnISystem : ISystem {
 
         public void OnCreate(ref SystemState state) {

@@ -39,7 +39,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_PreTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     [BurstCompile]
     public partial struct RotatorISystem : ISystem {
 

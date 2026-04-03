@@ -44,8 +44,7 @@ namespace EugeneC.ECS {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup), OrderFirst = true)]
-    [UpdateAfter(typeof(InitializeRandomISystem))]
+    [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderFirst = true)]
     public partial struct SpawnGridISystem : ISystem {
 
         [BurstCompile]

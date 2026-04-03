@@ -8,7 +8,7 @@ using Unity.Transforms;
 namespace EugeneC.ECS {
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_PreTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct AgentMoveISystem : ISystem {
 
         private const float DistanceThreshold = 0.1f;

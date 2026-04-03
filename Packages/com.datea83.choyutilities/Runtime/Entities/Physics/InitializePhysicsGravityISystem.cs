@@ -4,7 +4,7 @@ using Unity.Physics;
 
 namespace EugeneC.ECS {
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
     [UpdateBefore(typeof(InitializeRandomISystem))]
     public partial struct InitializePhysicsGravityISystem : ISystem {
 

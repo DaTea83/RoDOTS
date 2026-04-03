@@ -53,7 +53,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_PostTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial class MouseGrabInputSystemBase : SystemBase {
 
         private const float MaxDistance = 100.0f;

@@ -7,7 +7,7 @@ using Unity.Transforms;
 namespace EugeneC.ECS {
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_PreTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct WaveMoveISystem : ISystem {
 
         private const float NoiseScale = .2F;

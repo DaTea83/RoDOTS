@@ -26,7 +26,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
+    [UpdateInGroup(typeof(EuCDestroySystemGroup))]
     [UpdateBefore(typeof(DestroyEntityISystem))]
     [BurstCompile]
     public partial struct DestroyAfterTimeISystem : ISystem {

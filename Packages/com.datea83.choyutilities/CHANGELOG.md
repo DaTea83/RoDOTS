@@ -2,8 +2,16 @@
 
 ## [0.1.14] - 2026-04-03
 
+### Added
+* Added EuCCleanupSystemGroup, changed all clean up system to use this system group
+* Added EuCSpawnSystemGroup, changed all spawn system to use this system group
+* Added EuCManagedComponentSystemGroup, changed all component initialization system to use this system group
+
 ### Fixed
 * GenericPoolingManager, GenericAudioManager, GenericLegacyUIManager, now manually sets the siblings index of each spawned object
+
+### Changed
+* Replace all Eu_ in systemgroup with EuC
 
 ## [0.1.13] - 2026-04-01
 

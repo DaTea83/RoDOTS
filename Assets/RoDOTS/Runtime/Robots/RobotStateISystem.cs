@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RoDOTS.runtime {
 
-    [UpdateInGroup(typeof(Eu_PostTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial struct RobotStateISystem : ISystem {
 
         private int _movement;

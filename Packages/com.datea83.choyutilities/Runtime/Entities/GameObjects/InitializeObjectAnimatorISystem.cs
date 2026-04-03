@@ -7,7 +7,7 @@ namespace EugeneC.ECS {
     /// <summary>
     ///     Add required components to the entity
     /// </summary>
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCSpawnSystemGroup), OrderLast = true)]
     public partial struct InitializeObjectAnimatorISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

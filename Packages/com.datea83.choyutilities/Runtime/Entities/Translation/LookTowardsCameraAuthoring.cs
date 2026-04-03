@@ -22,7 +22,7 @@ namespace EugeneC.ECS {
 
     public struct LookTowardsCameraITag : IComponentData { }
 
-    [UpdateInGroup(typeof(Eu_PostTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
     public partial struct LookTowardsCameraISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

@@ -38,7 +38,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct SpawnDelayEntityISystem : ISystem {
 
         [BurstCompile]

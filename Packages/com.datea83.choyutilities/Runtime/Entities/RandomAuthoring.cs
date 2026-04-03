@@ -75,7 +75,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem), OrderFirst = true)]
     public partial struct InitializeRandomISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

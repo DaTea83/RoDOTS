@@ -39,7 +39,7 @@ namespace EugeneC.ECS {
     public struct UrpColorChangedITag : IComponentData { }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct UrpRandomColorISystem : ISystem {
 
         public void OnCreate(ref SystemState state) {

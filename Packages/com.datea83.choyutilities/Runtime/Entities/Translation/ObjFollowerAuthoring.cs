@@ -42,7 +42,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_PostTransformSystemGroup), OrderFirst = true)]
+    [UpdateInGroup(typeof(EuCPostTransformSystemGroup), OrderFirst = true)]
     public partial struct ObjFollowerISystem : ISystem {
 
         public void OnUpdate(ref SystemState state) {

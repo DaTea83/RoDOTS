@@ -30,7 +30,7 @@ namespace EugeneC.ECS {
     ///     Set the transform reference of main camera to IData
     ///     Remove the InitializeTag
     /// </summary>
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     public partial struct InitializeCameraTargetISystem : ISystem {
 
         public void OnCreate(ref SystemState state) {

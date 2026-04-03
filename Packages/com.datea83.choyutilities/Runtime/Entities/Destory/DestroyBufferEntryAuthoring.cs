@@ -24,7 +24,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
+    [UpdateInGroup(typeof(EuCDestroySystemGroup))]
     [UpdateBefore(typeof(DestroyEntityISystem))]
     public partial struct DestroyBufferISystem : ISystem {
 

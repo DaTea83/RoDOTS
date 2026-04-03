@@ -93,8 +93,7 @@ namespace EugeneC.ECS {
     }
 
     [BurstCompile]
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup), OrderFirst = true)]
-    [UpdateAfter(typeof(InitializeRandomISystem))]
+    [UpdateInGroup(typeof(EuCSpawnSystemGroup))]
     public partial struct TextGridSpawnISystem : ISystem {
 
         [BurstCompile]

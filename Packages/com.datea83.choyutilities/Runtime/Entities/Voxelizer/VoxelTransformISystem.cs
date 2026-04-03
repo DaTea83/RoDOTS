@@ -9,7 +9,7 @@ using UnityEngine;
 namespace EugeneC.ECS {
 
     [BurstCompile(CompileSynchronously = true)]
-    [UpdateInGroup(typeof(Eu_PreTransformSystemGroup))]
+    [UpdateInGroup(typeof(EuCPreTransformSystemGroup))]
     public partial struct VoxelTransformISystem : ISystem {
 
         public void OnCreate(ref SystemState state) {

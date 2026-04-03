@@ -3,7 +3,7 @@
 namespace EugeneC.ECS {
 
     //TODO
-    [UpdateInGroup(typeof(Eu_EffectSystemGroup))]
+    [UpdateInGroup(typeof(EuCEffectSystemGroup))]
     public partial class UiHandleSystemBase : SystemBase {
 
         // public event Action<byte, byte> OnUiEnterHover;

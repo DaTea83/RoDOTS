@@ -5,8 +5,7 @@ namespace EugeneC.ECS {
     /// <summary>
     ///     Notify singleton that the entity is destroyed
     /// </summary>
-    [UpdateInGroup(typeof(Eu_DestroySystemGroup))]
-    [UpdateAfter(typeof(DestroyEntityISystem))]
+    [UpdateInGroup(typeof(EuCCleanupSystemGroup))]
     public partial struct CleanupAgentMoveISystem : ISystem {
 
         public void OnCreate(ref SystemState state) {

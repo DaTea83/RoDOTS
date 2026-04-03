@@ -39,7 +39,7 @@ namespace EugeneC.ECS {
 
     }
 
-    [UpdateInGroup(typeof(Eu_InitializationSystemGroup))]
+    [UpdateInGroup(typeof(EuCManagedComponentSystem))]
     [UpdateAfter(typeof(InitializePhysicsMassISystem))]
     public partial struct InitializeLockRotationISystem : ISystem {
 
