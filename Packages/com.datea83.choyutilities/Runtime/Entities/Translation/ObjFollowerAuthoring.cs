@@ -1,5 +1,3 @@
-using System;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -34,13 +32,14 @@ namespace EugeneC.ECS {
     }
 
     /// <summary>
-    /// GameObject follow entity transform
+    ///     GameObject follow entity transform
     /// </summary>
     public struct ObjTransformIData : IComponentData {
 
         public UnityObjectRef<Transform> Transform;
         public float3 Offset;
         public float SmoothFollowSpeed;
+
     }
 
     [UpdateInGroup(typeof(Eu_PostTransformSystemGroup), OrderFirst = true)]
@@ -52,6 +51,7 @@ namespace EugeneC.ECS {
             foreach (var (ltw, objTransformRef)
                      in SystemAPI.Query<RefRO<LocalToWorld>, RefRW<ObjTransformIData>>()) {
                 var targetPos = ltw.ValueRO.Position + objTransformRef.ValueRO.Offset;
+
                 var factor = objTransformRef.ValueRO.SmoothFollowSpeed > 0
                     ? objTransformRef.ValueRO.SmoothFollowSpeed * dt
                     : 1;
@@ -63,4 +63,5 @@ namespace EugeneC.ECS {
         }
 
     }
+
 }

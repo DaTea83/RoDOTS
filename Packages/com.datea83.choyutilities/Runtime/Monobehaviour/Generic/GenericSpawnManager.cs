@@ -11,14 +11,15 @@ namespace EugeneC.Singleton {
         where TEnum : Enum
         where TMono : MonoBehaviour {
 
-        private List<Component> _spawnedObjects;
+        private List<(Component obj, TEnum id)> _spawnedObjects;
 
         protected virtual void OnEnable() {
-            _spawnedObjects = ListPool<Component>.Get();
+            _spawnedObjects = ListPool<(Component, TEnum)>.Get();
         }
 
         protected override void OnDisable() {
-            ListPool<Component>.Release(_spawnedObjects);
+            DespawnAll();
+            ListPool<(Component, TEnum)>.Release(_spawnedObjects);
             base.OnDisable();
         }
 
@@ -30,7 +31,7 @@ namespace EugeneC.Singleton {
             var spawned = Pools[index].Get();
             spawned.transform.position = location;
             spawned.transform.rotation = rotation;
-            _spawnedObjects.Add(spawned);
+            _spawnedObjects.Add((spawned, id));
 
             return spawned;
         }
@@ -61,21 +62,20 @@ namespace EugeneC.Singleton {
 
             if (index == -1) return;
 
-            var success = _spawnedObjects.Remove(component);
+            var i = _spawnedObjects.FindIndex(t => t.obj == component);
 
-            if (!success) throw new Exception("spawn not found in spawned objects");
+            if (i == -1) throw new Exception("spawn not found in spawned objects");
+            _spawnedObjects.RemoveAt(i);
             Pools[index].Release(component);
         }
 
         public virtual void DespawnAll() {
-            ListPool<Component>.Release(_spawnedObjects);
-
-            foreach (var p in Pools) {
-                p?.Dispose();
-                p?.Clear();
+            foreach (var (obj, id) in _spawnedObjects) {
+                var index = GetPoolIndex(id);
+                if (index != -1) Pools[index].Release(obj);
             }
 
-            _spawnedObjects = ListPool<Component>.Get();
+            _spawnedObjects.Clear();
         }
 
     }

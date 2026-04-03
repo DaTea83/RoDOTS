@@ -2,7 +2,7 @@
 using Unity.Entities;
 
 namespace EugeneC.ObsoleteV2 {
-    
+
     [Obsolete]
     public class DemoPathwayAgent : GenericPathwayController<DemoPathwayControllerAuthoring,
         DemoPathwayControllerAuthoring.EPathway>.AgentMovementBase {

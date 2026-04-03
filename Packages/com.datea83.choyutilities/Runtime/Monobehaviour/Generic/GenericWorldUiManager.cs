@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using EugeneC.ECS;
 using EugeneC.Mono;
-using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Physics;
-using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.Pool;
-using BoxCollider = Unity.Physics.BoxCollider;
 
 namespace EugeneC.Singleton {
 
@@ -18,46 +13,41 @@ namespace EugeneC.Singleton {
         where TMono : MonoBehaviour {
 
         [SerializeField] protected Canvas canvasRef;
-        [SerializeField] protected bool spawnEcsCollider;
-
-        [HideInInspector] public bool isTransitioning;
 
         private List<UiHelper> _openedUi;
-
         protected RectTransform CanvasPos => canvasRef.transform as RectTransform;
+
+        public bool IsTransitioning { get; private set; }
 
         protected override async void Start() {
             try {
                 await Awaitable.NextFrameAsync(Token);
 
                 if (canvasRef is null) throw new Exception("Canvas is not set");
-                CreateArchetype();
-                _uiHandleSystem = World.GetExistingSystemManaged<UiHandleSystemBase>();
-
                 Pools = new ObjectPool<UiHelper>[poolPrefabs.Length];
                 RuntimePools = new RuntimePoolSerialize[poolPrefabs.Length];
 
-                for (byte i = 0; i < Pools.Length; i++) {
+                for (var i = 0; i < poolPrefabs.Length; i++) {
                     if (poolPrefabs[i].prefab is null) continue;
 
+                    //Set the length to 1 as there should be only one instance of that type of UI at a time
                     RuntimePools[i].spawn = new UiHelper[1];
+
                     var id = i;
 
+                    // Initialize the pool
                     Pools[i] = InitPool(() => {
                         var spawn = Instantiate(poolPrefabs[id].prefab, CanvasPos);
                         spawn.OnSpawn();
-                        spawn.SetId(id);
-                        spawn.SetAndSubSystem(_uiHandleSystem);
-                        CreateEntities(spawn.uiTransforms, id);
                         RuntimePools[id].spawn[0] = spawn;
                         spawn.gameObject.SetActive(false);
 
                         return spawn;
                     });
-
-                    var spawnUi = Pools[i].Get();
-                    RuntimePools[i].spawn[0] = spawnUi;
                 }
+
+                if (InitializeOnStart)
+                    ForcedNewInstance();
             }
             catch (Exception e) {
                 Debug.LogError(e);
@@ -82,12 +72,19 @@ namespace EugeneC.Singleton {
         public event Action OnOpenUi;
         public event Action OnCloseUi;
 
+        protected virtual void ForcedNewInstance() {
+            for (var i = 0; i < poolPrefabs.Length; i++) {
+                var spawnUi = Pools[i].Get();
+                RuntimePools[i].spawn[0] = spawnUi;
+            }
+        }
+
         public virtual async Awaitable<(UiHelper, bool)> Open(TEnum id) {
             var index = GetPoolIndex(id);
 
             if (index == -1) return (null, false);
 
-            isTransitioning = true;
+            IsTransitioning = true;
             var newUi = RuntimePools[index].spawn[0];
             newUi.gameObject.SetActive(true);
             _openedUi.Add(newUi);
@@ -96,7 +93,7 @@ namespace EugeneC.Singleton {
             var t = newUi.OnStartOpen();
             await Awaitable.WaitForSecondsAsync(math.abs(t), Token);
             newUi.OnEndOpen();
-            isTransitioning = false;
+            IsTransitioning = false;
 
             return (newUi, true);
         }
@@ -106,7 +103,7 @@ namespace EugeneC.Singleton {
 
             if (index == -1) return (null, false);
 
-            isTransitioning = true;
+            IsTransitioning = true;
             var newUi = RuntimePools[index].spawn[0];
 
             OnCloseUi?.Invoke();
@@ -117,13 +114,13 @@ namespace EugeneC.Singleton {
             await Awaitable.NextFrameAsync();
             newUi.gameObject.SetActive(false);
             _openedUi.Remove(newUi);
-            isTransitioning = false;
+            IsTransitioning = false;
 
             return (newUi, true);
         }
 
         public virtual async Awaitable<bool> CloseAll() {
-            isTransitioning = true;
+            IsTransitioning = true;
             var i = 0f;
 
             foreach (var ui in _openedUi) {
@@ -141,7 +138,7 @@ namespace EugeneC.Singleton {
                 ui.gameObject.SetActive(false);
             }
 
-            isTransitioning = false;
+            IsTransitioning = false;
             _openedUi.Clear();
 
             return true;
@@ -155,90 +152,6 @@ namespace EugeneC.Singleton {
 
             return true;
         }
-
-        #region ECS
-
-        private EntityArchetype _archetype;
-        private UiHandleSystemBase _uiHandleSystem;
-
-        private void CreateArchetype() {
-            if (!spawnEcsCollider) return;
-
-            _archetype = World.EntityManager.CreateArchetype(
-                typeof(LocalTransform),
-                typeof(PhysicsMass),
-                typeof(PhysicsCollider),
-                typeof(PhysicsVelocity),
-                typeof(PhysicsGravityFactor),
-                typeof(EntityTransformIData),
-                typeof(UIData),
-                typeof(UIBuffer));
-        }
-
-        private void CreateEntities(RectTransform[] uiTransforms, byte parentId) {
-            if (!spawnEcsCollider) return;
-            if (uiTransforms is null || uiTransforms.Length == 0) return;
-
-            var manager = World.EntityManager;
-
-            var gravity = new PhysicsGravityFactor {
-                Value = 0
-            };
-
-            var mass = new PhysicsMass {
-                InverseMass = 0,
-                InverseInertia = float3.zero
-            };
-
-            for (var i = 0; i < uiTransforms.Length; i++) {
-                var entity = manager.CreateEntity(_archetype);
-
-                var rect = uiTransforms[i].rect;
-                var lossyScale = uiTransforms[i].lossyScale;
-
-                var size = new float3(
-                    rect.width * lossyScale.x,
-                    rect.height * lossyScale.y,
-                    0.1f
-                );
-
-                using var box = BoxCollider.Create(new BoxGeometry {
-                    Center = float3.zero,
-                    Orientation = quaternion.identity,
-                    Size = size,
-                    BevelRadius = 0f
-                });
-
-                var col = new PhysicsCollider {
-                    Value = box
-                };
-
-                var lt = new LocalTransform {
-                    Position = uiTransforms[i].position,
-                    Rotation = uiTransforms[i].rotation
-                };
-
-                var follow = new EntityTransformIData {
-                    Transform = uiTransforms[i],
-                    Offset = 0,
-                    SmoothFollowSpeed = 0
-                };
-
-                var ui = new UIData {
-                    ParentId = parentId,
-                    OwnId = (byte)i
-                };
-
-                manager.SetComponentData(entity, gravity);
-                manager.SetComponentData(entity, mass);
-                manager.SetComponentData(entity, col);
-                manager.SetComponentData(entity, lt);
-                manager.SetComponentData(entity, follow);
-                manager.SetComponentData(entity, ui);
-            }
-        }
-
-        #endregion
 
     }
 

@@ -27,19 +27,16 @@ Shader "Terastal/PrimitiveIDExample"
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-            float rand(float2 seed, float min, float max)
-            {
+            float rand(float2 seed, float min, float max) {
                 float r = frac(sin(dot(seed, float2(12.9898, 78.2333))) * 43758.5453);
                 return lerp(min, max, r);
             }
 
-            struct appdata
-            {
+            struct appdata {
                 float4 positionOS : Position;
             };
 
-            struct v2f
-            {
+            struct v2f {
                 float4 positionCS : SV_Position;
             };
 
@@ -47,15 +44,13 @@ Shader "Terastal/PrimitiveIDExample"
                 float4 _BaseColor;
             CBUFFER_END
 
-            v2f vert(appdata v)
-            {
+            v2f vert(appdata v) {
                 v2f o;
                 o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
                 return o;
             }
 
-            float4 frag(v2f i, uint primitiveID : SV_PrimitiveID) : SV_Target
-            {
+            float4 frag(v2f i, uint primitiveID : SV_PrimitiveID) : SV_Target {
                 return rand(primitiveID, 0.0f, 1.0f);
             }
             ENDHLSL

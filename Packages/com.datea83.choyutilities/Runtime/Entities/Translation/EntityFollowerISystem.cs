@@ -6,7 +6,7 @@ using UnityEngine;
 namespace EugeneC.ECS {
 
     /// <summary>
-    /// Entity follow gameObject transform
+    ///     Entity follow gameObject transform
     /// </summary>
     public struct EntityTransformIData : IComponentData {
 

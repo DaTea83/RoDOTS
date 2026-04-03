@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace EugeneC.Utilities {
 
-    public static partial class UtilityCollection {
+    public static partial class HelperCollection {
 
         public static IEnumerator FadeScreenCoroutine(this Image fadeImage,
             bool isFadein,
@@ -20,7 +21,7 @@ namespace EugeneC.Utilities {
 
             while (time <= loadDuration) {
                 time += Time.unscaledDeltaTime;
-                var alpha = Mathf.Lerp(currentAlpha, targetAlpha, time / loadDuration);
+                var alpha = math.lerp(currentAlpha, targetAlpha, time / loadDuration);
                 fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, alpha);
 
                 yield return null;
@@ -61,7 +62,7 @@ namespace EugeneC.Utilities {
 
             while (time < moveDuration) {
                 time += Time.unscaledDeltaTime;
-                var pos = Vector3.Lerp(startPos, endPos, time / moveDuration);
+                var pos = math.lerp(startPos, endPos, time / moveDuration);
                 obj.transform.position = pos;
 
                 yield return null;
@@ -83,7 +84,7 @@ namespace EugeneC.Utilities {
 
             while (time < moveDuration) {
                 time += Time.unscaledDeltaTime;
-                var pos = Vector3.Lerp(startPos, endPos, time / moveDuration);
+                var pos = math.lerp(startPos, endPos, time / moveDuration);
                 obj.transform.position = pos;
 
                 yield return null;

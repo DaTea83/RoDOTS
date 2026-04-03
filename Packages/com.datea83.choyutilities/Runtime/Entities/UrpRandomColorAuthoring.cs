@@ -7,11 +7,11 @@ using UnityEngine;
 namespace EugeneC.ECS {
 
     /// <summary>
-    /// Any entity with URP lit material will be randomized with a color
+    ///     Any entity with URP lit material will be randomized with a color
     /// </summary>
     [DisallowMultipleComponent]
     public class UrpRandomColorAuthoring : MonoBehaviour {
-        
+
         [SerializeField] private Color[] colors;
 
         private class Baker : Baker<UrpRandomColorAuthoring> {
@@ -21,19 +21,21 @@ namespace EugeneC.ECS {
                 var e = GetEntity(TransformUsageFlags.None);
                 var buffer = AddBuffer<UrpRandomColorISingletonBuffer>(e);
 
-                foreach (var color in authoring.colors) {
-                    buffer.Add(new UrpRandomColorISingletonBuffer { Value = new float4(color.r, color.g, color.b, color.a) });
-                }
+                foreach (var color in authoring.colors)
+                    buffer.Add(new UrpRandomColorISingletonBuffer
+                        { Value = new float4(color.r, color.g, color.b, color.a) });
             }
+
         }
 
     }
-    
+
     public struct UrpRandomColorISingletonBuffer : IBufferElementData {
 
         public float4 Value;
+
     }
-    
+
     public struct UrpColorChangedITag : IComponentData { }
 
     [BurstCompile]
@@ -46,22 +48,23 @@ namespace EugeneC.ECS {
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state) {
-            
             var buffer = SystemAPI.GetSingletonBuffer<UrpRandomColorISingletonBuffer>();
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-            foreach (var (material, random, entity) 
+            foreach (var (material, random, entity)
                      in SystemAPI.Query<RefRW<URPMaterialPropertyBaseColor>, RefRW<RandomIData>>()
                          .WithNone<UrpColorChangedITag>().WithEntityAccess()) {
                 if (random.ValueRO.Value.state == 0) continue;
-                
+
                 var index = random.ValueRW.Value.NextInt(0, buffer.Length);
                 material.ValueRW.Value = buffer[index].Value;
-                
+
                 ecb.AddComponent<UrpColorChangedITag>(entity);
             }
+
             ecb.Playback(state.EntityManager);
         }
 
     }
+
 }

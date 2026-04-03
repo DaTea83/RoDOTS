@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace EugeneC.Utilities {
 
-    public static partial class UtilityCollection {
+    public static partial class HelperCollection {
 
         private const string TaskCancellationMessage = "Task was cancelled";
 

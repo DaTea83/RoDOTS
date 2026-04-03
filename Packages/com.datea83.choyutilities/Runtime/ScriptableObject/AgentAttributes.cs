@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable InconsistentNaming
 
@@ -11,8 +12,10 @@ namespace EugeneC.Utilities {
         [Min(0.01f)] public float RotationSpeed = 3f;
         public bool HasRestTime = true;
         [Min(0.01f)] public float RestTime = 1f;
-        [Tooltip("0 and below means it doesn't despawn")]
-        [Min(0f)] public float ExistTime = 0f;
+
+        [Tooltip("0 and below means it doesn't despawn")] [Min(0f)]
+        public float ExistTime;
+
     }
 
 }

@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.13] - 2026-04-01
+
+### Fixed
+* GenericSpawnManager doesn't do DespawnAll() properly
+
+### Changed
+* GenericPoolingManager, InitPool(createFunc) is now public
+* UiHelper, reverted back to pre 0.1.6 version
+* GenericWorldUIManager, renamed to GenericLegacyUIManager and funtionality reverted back to pre 0.1.6 version
+* HelperCollection renamed to MathCollection
+* ExtensionStuff to TransformCollection
+* ExtensionAsync to AsyncCollection
+* ExtensionBlobArray to BlobCollection
+* ExtensionCoroutine to CoroutineCollection
+* ExtensionEntities to EntityCollection
+* ExtensionSplinePoints to SplineCollection
+* StaticStuff to HelperCollection
+
+### Deleted
+* Replaced all UtilityCollection with HelperCollection
+
 ## [0.1.12] - 2026-03-30
 
 ### Added

@@ -15,8 +15,8 @@ namespace EugeneC.ECS {
         [SerializeField] private AgentStatsAuthoring[] spawnPrefabs;
         [SerializeField] private bool spawnOnce;
         [SerializeField] private bool disabledOnStart;
-        [SerializeField][Min(0.01f)] private float delay = 1f;
-        
+        [SerializeField] [Min(0.01f)] private float delay = 1f;
+
         private class Baker : Baker<SpawnNodeAuthoring> {
 
             public override void Bake(SpawnNodeAuthoring authoring) {
@@ -26,20 +26,23 @@ namespace EugeneC.ECS {
 
                 foreach (var prefab in authoring.spawnPrefabs) {
                     DependsOn(prefab);
+
                     buffer.Add(new SpawnNodeIBuffer {
                         Prefab = GetEntity(prefab.gameObject, TransformUsageFlags.Dynamic)
                     });
                 }
-                
+
                 AddComponent(e, new SpawnNodeIEnableable {
                     SpawnOnce = authoring.spawnOnce,
-                    DefaultSpawnDelay = authoring.delay,
+                    DefaultSpawnDelay = authoring.delay
                 });
-                
-                if(authoring.disabledOnStart)
-	                SetComponentEnabled<SpawnNodeIEnableable>(e, false);
+
+                if (authoring.disabledOnStart)
+                    SetComponentEnabled<SpawnNodeIEnableable>(e, false);
             }
+
         }
+
     }
 
     [BurstCompile]
@@ -56,17 +59,19 @@ namespace EugeneC.ECS {
             var singleton = SystemAPI.GetSingleton<AgentISingleton>();
 
             if (singleton.SpawnLimit != 0)
-                if (singleton.SpawnLimit <= singleton.TotalSpawnCount) return;
-            
+                if (singleton.SpawnLimit <= singleton.TotalSpawnCount)
+                    return;
+
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var et = SystemAPI.Time.ElapsedTime;
             var dt = SystemAPI.Time.DeltaTime;
-            
+
             foreach (var (spawn, buffer, ltw, entity)
-                     in SystemAPI.Query<RefRW<SpawnNodeIEnableable>, DynamicBuffer<SpawnNodeIBuffer>, RefRO<LocalToWorld>>()
+                     in SystemAPI
+                         .Query<RefRW<SpawnNodeIEnableable>, DynamicBuffer<SpawnNodeIBuffer>, RefRO<LocalToWorld>>()
                          .WithEntityAccess()) {
-                
                 spawn.ValueRW.CurrentSpawnDelay += dt;
+
                 if (spawn.ValueRO.CurrentSpawnDelay < spawn.ValueRO.DefaultSpawnDelay) continue;
                 spawn.ValueRW.CurrentSpawnDelay = 0;
 
@@ -74,21 +79,22 @@ namespace EugeneC.ECS {
                 var newEntity = ecb.Instantiate(buffer[index].Prefab);
                 singleton.CurrentSpawnCount++;
                 singleton.TotalSpawnCount++;
-                
+
                 ecb.AddComponent(newEntity, new InitializeAgentIData {
-                    Spawn = entity,
+                    Spawn = entity
                 });
+
                 ecb.SetComponent(newEntity, LocalTransform.FromPositionRotation(
                     ltw.ValueRO.Position, ltw.ValueRO.Rotation));
-                
-                if (spawn.ValueRO.SpawnOnce) {
-                    ecb.SetComponentEnabled<SpawnNodeIEnableable>(entity, false);
-                }
+
+                if (spawn.ValueRO.SpawnOnce) ecb.SetComponentEnabled<SpawnNodeIEnableable>(entity, false);
             }
+
             ecb.Playback(state.EntityManager);
-            
+
             SystemAPI.SetSingleton(singleton);
         }
 
     }
+
 }

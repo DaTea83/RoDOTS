@@ -1,9 +1,10 @@
 using Unity.Collections;
+using Unity.Entities;
 using Unity.Mathematics;
 
 namespace EugeneC.Utilities {
 
-    public static partial class UtilityCollection {
+    public static partial class HelperCollection {
 
         /// <summary>
         ///     Bake the spline using Barry–Goldman algorithm
@@ -54,7 +55,71 @@ namespace EugeneC.Utilities {
                 return points[index];
             }
         }
+        
+        public static float3 GetClosestPointInSplineSegment(float3 lineStart, float3 lineEnd,
+            float3 point, out float t) {
+            t = 0f;
+            var vec = lineEnd - lineStart;
+            var lenSq = math.lengthsq(vec);
+
+            if (lenSq <= 0f) return lineStart;
+
+            t = math.clamp(math.dot(point - lineStart, vec) / lenSq, 0f, 1f);
+
+            return lineStart + vec * t;
+        }
+
+        public static void SampleAtDistance(ref SplineVectorBlob spline, float targetDist,
+            out float3 position, out quaternion rotation) {
+            ref var posArr = ref spline.Position;
+            ref var dstArr = ref spline.Distance;
+            ref var rotArr = ref spline.Rotation;
+
+            var count = posArr.Length;
+
+            switch (count) {
+                case 0:
+
+                    position = default;
+                    rotation = quaternion.identity;
+
+                    return;
+                case 1:
+
+                    position = posArr[0];
+                    rotation = rotArr[0];
+
+                    return;
+            }
+
+            var idx = dstArr.LowerBound(targetDist);
+            idx = math.clamp(idx, 0, count - 2);
+
+            var d0 = dstArr[idx];
+            var d1 = dstArr[idx + 1];
+            var segLen = math.max(1e-6f, d1 - d0);
+            var t = math.saturate((targetDist - d0) / segLen);
+
+            var p0 = posArr[idx];
+            var p1 = posArr[idx + 1];
+            position = math.lerp(p0, p1, t);
+
+            var r0 = rotArr[idx];
+            var r1 = rotArr[idx + 1];
+            rotation = math.slerp(r0, r1, t);
+        }
 
     }
+
+    public struct SplineVectorBlob {
+
+        public BlobArray<float3> Position;
+        public BlobArray<float> Distance;
+        public BlobArray<quaternion> Rotation;
+        public BlobArray<float3> Tangent;
+
+    }
+
+    
 
 }

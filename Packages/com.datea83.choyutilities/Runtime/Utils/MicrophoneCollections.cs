@@ -12,7 +12,7 @@ namespace EugeneC.Utilities {
 
     }
 
-    public static class MicrophoneCollections {
+    public static partial class HelperCollection {
 
         public static bool SimpleVad(float[] data, int sampleRate, float lastSec, float vadThd, float freqThd) {
             // https://github.com/ggerganov/whisper.cpp/blob/a792c4079ce61358134da4c9bc589c15a03b04ad/examples/common.cpp#L697

@@ -78,7 +78,7 @@ namespace EugeneC.Singleton {
             });
         }
 
-        protected virtual ObjectPool<TObj> InitPool(Func<TObj> createFunc) {
+        public virtual ObjectPool<TObj> InitPool(Func<TObj> createFunc) {
             var pool = new ObjectPool<TObj>(
                 createFunc,
                 obj => obj.gameObject.SetActive(true),

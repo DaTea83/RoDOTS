@@ -158,7 +158,7 @@ namespace EugeneC.Utilities {
 
             // try to get sample for voice detection
             var data = GetMicBufferLast(micPos, vadContextSec);
-            var vad = MicrophoneCollections.SimpleVad(data, _clip.frequency, vadLastSec, vadThd, vadFreqThd);
+            var vad = HelperCollection.SimpleVad(data, _clip.frequency, vadLastSec, vadThd, vadFreqThd);
 
             // raise event if vad has changed
             if (vad != IsVoiceDetected) {

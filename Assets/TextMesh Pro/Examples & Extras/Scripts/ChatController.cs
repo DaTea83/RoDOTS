@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ChatController : MonoBehaviour {
-
 
     public TMP_InputField ChatInputField;
 
@@ -11,28 +11,25 @@ public class ChatController : MonoBehaviour {
 
     public Scrollbar ChatScrollbar;
 
-    void OnEnable()
-    {
+    private void OnEnable() {
         ChatInputField.onSubmit.AddListener(AddToChatOutput);
     }
 
-    void OnDisable()
-    {
+    private void OnDisable() {
         ChatInputField.onSubmit.RemoveListener(AddToChatOutput);
     }
 
 
-    void AddToChatOutput(string newText)
-    {
+    private void AddToChatOutput(string newText) {
         // Clear Input Field
         ChatInputField.text = string.Empty;
 
-        var timeNow = System.DateTime.Now;
+        var timeNow = DateTime.Now;
 
-        string formattedInput = "[<#FFFF80>" + timeNow.Hour.ToString("d2") + ":" + timeNow.Minute.ToString("d2") + ":" + timeNow.Second.ToString("d2") + "</color>] " + newText;
+        var formattedInput = "[<#FFFF80>" + timeNow.Hour.ToString("d2") + ":" + timeNow.Minute.ToString("d2") + ":" +
+                             timeNow.Second.ToString("d2") + "</color>] " + newText;
 
-        if (ChatDisplayOutput != null)
-        {
+        if (ChatDisplayOutput != null) {
             // No special formatting for first entry
             // Add line feed before each subsequent entries
             if (ChatDisplayOutput.text == string.Empty)

@@ -40,7 +40,7 @@ namespace EugeneC.Editor {
         private void OnGUI() {
             if (!GUI.Button(new Rect(0, 0, 200, 40), "Start Record")) return;
             if (_canRecord) return;
-            UtilityMethods.CallGenericInstanceMethod(className, methodName);
+            HelperCollection.CallGenericInstanceMethod(className, methodName);
             _canRecord = true;
         }
 

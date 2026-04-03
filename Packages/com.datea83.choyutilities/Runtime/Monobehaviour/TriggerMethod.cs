@@ -24,7 +24,7 @@ namespace EugeneC.Mono {
         private void OnTriggerEnter(Collider other) {
             if (other.gameObject.layer != layer && !other.gameObject.CompareTag(objectTag)) return;
 
-            UtilityMethods.CallGenericInstanceMethod(instanceClassName, methodName);
+            HelperCollection.CallGenericInstanceMethod(instanceClassName, methodName);
 
             if (turnOffAfter)
                 gameObject.SetActive(false);

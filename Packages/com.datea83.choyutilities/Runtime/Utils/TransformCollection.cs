@@ -1,29 +1,11 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace EugeneC.Utilities {
 
-    public static partial class UtilityCollection {
-
-        // Time-constant style smoothing
-        // -DeltaTime divide timeConstant, math.max just to avoid timeConstant is 0
-        // More consistent interpolation with different frame rates
-        public static float SmoothFactor(this float deltaTime, float timeConstant = 0.02f) {
-            return 1f - math.exp(-deltaTime / math.max(1e-4f, timeConstant));
-        }
-
-        public static float3 GetNoiseOffsetPos(this float3 pos,
-            float yOffset,
-            float time,
-            float height,
-            float noiseScale,
-            float depthOffset) {
-            pos.y = height * noise.snoise(new float2(pos.x * noiseScale + time,
-                pos.z * noiseScale + time)) + yOffset * depthOffset;
-
-            return pos;
-        }
+    public static partial class HelperCollection {
 
         public static Quaternion RotateTowards(this Transform ob, float3 target, float speed) {
             var dir = math.normalize(target - (float3)ob.position);
@@ -121,6 +103,50 @@ namespace EugeneC.Utilities {
             }
 
             return nearest;
+        }
+        
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalTransform player,
+            LocalToWorld target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward(), math.normalize(dir));
+
+            return dot >= 0f;
+        }
+
+        public static bool GetDistanceAndDot(this LocalToWorld player,
+            LocalTransform target,
+            out float distanceSqr,
+            out float dot) {
+            var dir = target.Position - player.Position;
+            distanceSqr = math.lengthsq(dir);
+            dot = math.dot(player.Forward, math.normalize(dir));
+
+            return dot >= 0f;
         }
 
     }
