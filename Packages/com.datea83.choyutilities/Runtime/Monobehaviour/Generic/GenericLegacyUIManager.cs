@@ -22,7 +22,13 @@ namespace EugeneC.Singleton {
             try {
                 await Awaitable.NextFrameAsync(Token);
 
-                if (canvasRef is null) throw new Exception("Canvas is not set");
+                if (canvasRef is null) {
+                    TryGetComponent(out canvasRef);
+                    if (canvasRef is null)
+                        throw new Exception(
+                            "Canvas Reference is not set, please set it in the inspector or add it to the scene"
+                        );
+                }
                 Pools = new ObjectPool<UiHelper>[poolPrefabs.Length];
                 RuntimePools = new RuntimePoolSerialize[poolPrefabs.Length];
 
