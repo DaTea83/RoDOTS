@@ -16,14 +16,19 @@ MonoBehaviour:
   m_GUID: 74c9e62c6fa0d0e45b61a4de0144833c
   m_SerializeEntries:
   - m_GUID: 95784e8d320687d4abc557c29fcd4c5f
-    m_Address: RoDOTS_Collection_ms
+    m_Address: RoDOTS_Menu_ms
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ms
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 97d99fe62c2c7314395c0bc5ba7f03a8
     m_Address: UI Table_ms
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ms
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db3c0dc91f1a58048b8ef41da50c5deb
+    m_Address: RoDOTS_Smart_ms
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ms

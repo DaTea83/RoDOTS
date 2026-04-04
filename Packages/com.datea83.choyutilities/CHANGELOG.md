@@ -4,6 +4,10 @@
 
 ### Added
 * Added EuCEditorSystemGroup
+* HelperCollection, added GetLocaleCode()
+
+### Changed
+* MonoFpsCounnter, now requires LocalizedString
 
 ## [0.1.14] - 2026-04-03
 

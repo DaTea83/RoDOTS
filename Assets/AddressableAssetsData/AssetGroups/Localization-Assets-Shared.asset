@@ -21,8 +21,8 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5dd61454e593ddc43aa925e888e5b2a9
-    m_Address: Assets/RoDOTS/Resources/Locale/RoDOTS_Collection Shared Data.asset
+  - m_GUID: 9bc747ac1c8e8d44c93b2b5b36973597
+    m_Address: Assets/RoDOTS/Resources/Locale/RoDOTS_Smart Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

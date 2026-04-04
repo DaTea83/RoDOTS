@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Chinese (Simplified) (zh-Hans)
   m_GUID: c46bb1c52e70ea04599986fc98cc521a
   m_SerializeEntries:
+  - m_GUID: 36fef29633bc84541b5973d72b430d0d
+    m_Address: RoDOTS_Smart_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46f6e9ff0de84ac4da4595cd1a128e06
     m_Address: UI Table_zh-Hans
     m_ReadOnly: 1
@@ -22,11 +28,10 @@ MonoBehaviour:
     - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcb11d7f6ed47a34c8dfcb9402d57f1c
-    m_Address: RoDOTS_Collection_zh-Hans
+    m_Address: RoDOTS_Menu_zh-Hans
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-zh-Hans
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 729e5b42f3bd0534c8cb4db44b259acb, type: 2}

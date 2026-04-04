@@ -16,11 +16,15 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 257ead27c8625854286d326eaf4457a9
   m_Entries:
   - m_Id: 246275891200
-    m_Key: mainMenu.Start
+    m_Key: ui.start
     m_Metadata:
       m_Items: []
   - m_Id: 1132897230848
-    m_Key: mainMenu.Exit
+    m_Key: ui.exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 78238304045096960
+    m_Key: ui.fps
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace EugeneC.Utilities {
 
@@ -8,17 +9,21 @@ namespace EugeneC.Utilities {
     public sealed class MonoFpsCounter : MonoBehaviour {
 
         [SerializeField] private TMP_Text displayText;
+        [SerializeField] private LocalizedString fpsString;
 
         private float _frames;
         private float _time;
 
         private float FPS => _frames / _time;
 
+        private void OnValidate() {
+            displayText ??= GetComponent<TMP_Text>();
+        }
+
         private void Start() {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 500;
-
-            displayText ??= GetComponent<TMP_Text>();
+            
             InvokeRepeating(nameof(UpdateText), .1f, .5f);
         }
 
@@ -33,7 +38,7 @@ namespace EugeneC.Utilities {
 
         private void UpdateText() {
             if (displayText is null) return;
-            displayText.text = $"FPS: {FPS:f0}";
+            displayText.text = fpsString.GetLocalizedString($"{FPS:F1}");
         }
 
     }

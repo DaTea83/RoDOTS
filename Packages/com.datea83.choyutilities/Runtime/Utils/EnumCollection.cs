@@ -2,11 +2,11 @@ namespace EugeneC.Utilities {
 
     public enum ELanguage : byte {
 
-        English = 0,
-        SimplifiedChinese = 1,
-        TraditionalChinese = 2,
-        Malay = 3,
-        NotDefined = byte.MaxValue
+        NotDefined = 0,
+        English = 1,
+        SimplifiedChinese = 2,
+        TraditionalChinese = 3,
+        Malay = 4,
 
     }
 

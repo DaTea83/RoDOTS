@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 257ead27c8625854286d326eaf4457a9, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 268990125096304762
   m_TableData:
   - m_Id: 1132897230848
     m_Localized: Exit
@@ -26,6 +27,17 @@ MonoBehaviour:
     m_Localized: Start
     m_Metadata:
       m_Items: []
+  - m_Id: 78238304045096960
+    m_Localized: 'FPS: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 268990125096304762
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 268990125096304762
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 78238304045096960

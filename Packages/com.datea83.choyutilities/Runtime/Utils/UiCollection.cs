@@ -36,6 +36,19 @@ namespace EugeneC.Utilities {
             }
         }
 
+        public static string GetLocaleCode(this ELanguage language) {
+            return language switch {
+                ELanguage.NotDefined => throw new ArgumentOutOfRangeException(nameof(language), language,
+                    "Not defined language"),
+                ELanguage.English => "en",
+                ELanguage.SimplifiedChinese => "zh-Hans",
+                ELanguage.TraditionalChinese => "zh-TW",
+                ELanguage.Malay => "ms",
+                _ => throw new ArgumentOutOfRangeException(nameof(language), language, "" +
+                    "Not defined language")
+            };
+        }
+
         public static VisualElement GetVisualElement(this EVisualElements type) {
             return type switch {
                 EVisualElements.Button => new Button(),

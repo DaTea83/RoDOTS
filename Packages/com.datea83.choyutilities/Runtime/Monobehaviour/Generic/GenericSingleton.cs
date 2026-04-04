@@ -43,7 +43,7 @@ namespace EugeneC.Singleton {
         private const ushort MAX_FRAME = 200;
         protected World World { get; private set; }
 
-        private async void GetWorld() {
+        protected async void GetWorld() {
             try {
                 var frame = 0;
 
