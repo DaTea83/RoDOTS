@@ -5,6 +5,11 @@ using Unity.Transforms;
 // Purpose of these is to help encapsulates custom define systems and organize them
 namespace EugeneC.ECS {
 
+    [UpdateInGroup(typeof(SimulationSystemGroup))]
+    [UpdateAfter(typeof(TransformSystemGroup))]
+    [WorldSystemFilter(WorldSystemFilterFlags.Editor, WorldSystemFilterFlags.Editor)]
+    public partial class EuCEditorSystemGroup : ComponentSystemGroup { }
+    
     /// <summary>
     ///     System group containing systems related to initialization logic that should be executed towards the beginning of
     ///     the frame.

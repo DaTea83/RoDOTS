@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.15] - 2026-04-04
+
+### Added
+* Added EuCEditorSystemGroup
+
 ## [0.1.14] - 2026-04-03
 
 ### Added

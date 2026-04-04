@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: RoDOTS_Collection
+  m_EditorClassIdentifier: Unity.Localization.Editor::UnityEditor.Localization.StringTableCollection
+  m_SharedTableData: {fileID: 11400000, guid: 5dd61454e593ddc43aa925e888e5b2a9, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: dcb11d7f6ed47a34c8dfcb9402d57f1c, type: 2}
+  - {fileID: 11400000, guid: 4bf1ddbd2854af04fbb52955427587d9, type: 2}
+  - {fileID: 11400000, guid: bdda4f44795876249b20b26bae7bf919, type: 2}
+  - {fileID: 11400000, guid: 95784e8d320687d4abc557c29fcd4c5f, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

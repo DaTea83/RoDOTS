@@ -4,12 +4,21 @@ namespace EugeneC.Utilities {
 
     [RequireComponent(typeof(RectTransform))]
     public sealed class AutoResize : MonoBehaviour {
+        private enum EFitMode : byte {
 
+            Expand = 0,
+            Shrink = 1,
+            FitWidth = 1 << 1,
+            FitHeight = 1 << 2
+
+        }
+        
         [SerializeField] private EFitMode eFitMode;
         private RectTransform _parentRectTransform;
         private RectTransform _rectTransform;
 
         private void LateUpdate() {
+            
             if (_parentRectTransform is null) return;
             if (_rectTransform.rect.width == 0 || _rectTransform.rect.height == 0) return;
             var (width, height) = _rectTransform.GetBoundingBoxSize();

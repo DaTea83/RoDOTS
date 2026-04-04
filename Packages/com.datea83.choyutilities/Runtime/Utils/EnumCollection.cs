@@ -36,15 +36,6 @@ namespace EugeneC.Utilities {
 
     }
 
-    public enum EFitMode : byte {
-
-        Expand = 0,
-        Shrink = 1,
-        FitWidth = 1 << 1,
-        FitHeight = 1 << 2
-
-    }
-
     public enum EVisualElements {
 
         Button,

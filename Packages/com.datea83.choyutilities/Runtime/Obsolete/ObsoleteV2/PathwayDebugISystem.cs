@@ -1,4 +1,5 @@
 ﻿using System;
+using EugeneC.ECS;
 using Unity.Burst;
 using Unity.Entities;
 using UnityEngine;
@@ -6,7 +7,8 @@ using UnityEngine;
 namespace EugeneC.ObsoleteV2 {
 
     [Obsolete]
-    [WorldSystemFilter(WorldSystemFilterFlags.Editor)]
+    [DisableAutoCreation]
+    [UpdateInGroup(typeof(EuCEditorSystemGroup))]
     public partial struct PathwayDebugISystem : ISystem {
 
         [BurstCompile]

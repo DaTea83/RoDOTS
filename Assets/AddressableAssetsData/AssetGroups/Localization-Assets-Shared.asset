@@ -21,6 +21,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dd61454e593ddc43aa925e888e5b2a9
+    m_Address: Assets/RoDOTS/Resources/Locale/RoDOTS_Collection Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 729e5b42f3bd0534c8cb4db44b259acb, type: 2}
   m_SchemaSet:

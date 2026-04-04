@@ -15,6 +15,13 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-Chinese (Traditional) (zh-TW)
   m_GUID: 020dba779796bc948b445b70f749a426
   m_SerializeEntries:
+  - m_GUID: 4bf1ddbd2854af04fbb52955427587d9
+    m_Address: RoDOTS_Collection_zh-TW
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-TW
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 937333df1c161554d89338a2a8ca69a1
     m_Address: UI Table_zh-TW
     m_ReadOnly: 1
