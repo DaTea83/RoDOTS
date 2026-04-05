@@ -7,7 +7,7 @@ namespace EugeneC.Singleton {
 
     public abstract class GenericSingleton<T> : MonoBehaviour
         where T : MonoBehaviour {
-
+        
         public static T Instance { get; private set; }
 
         protected virtual void Awake() {
@@ -40,11 +40,15 @@ namespace EugeneC.Singleton {
 
         #region ECS
 
+        [SerializeField] protected bool getWorld = true;
+        
         private const ushort MAX_FRAME = 200;
         protected World World { get; private set; }
+        protected void ResetWorld() => World = null;
 
         protected async void GetWorld() {
             try {
+                if (!getWorld) return;
                 var frame = 0;
 
                 while (frame < MAX_FRAME) {

@@ -5,6 +5,7 @@
 ### Added
 * Added EuCEditorSystemGroup
 * HelperCollection, added GetLocaleCode()
+* GenericSingleton, added toggle for getting ECS World
 
 ### Changed
 * MonoFpsCounnter, now requires LocalizedString
