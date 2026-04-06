@@ -10,15 +10,12 @@ namespace RoDOTS.runtime {
             
         }
 
-        protected override bool InitializeOnStart => true;
-        protected override bool CollectionCheck => false;
-        
         protected override void Awake() {
             base.Awake();
             DontDestroyOnLoad(gameObject);
         }
         
-        protected void OnEnable() {
+        protected override void OnEnable() {
             
             SceneManager.sceneLoaded += OnNewScene();
             SceneManager.sceneUnloaded += OnExitScene();

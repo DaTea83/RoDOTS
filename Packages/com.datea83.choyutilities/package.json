@@ -1,7 +1,7 @@
 {
   "name": "com.datea83.choyutilities",
   "displayName": "ChoyUtilities",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "unity": "2022.3",
   "unityRelease": "1f1",
   "description": "Eugene Choy's Personal Unity Library",

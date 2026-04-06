@@ -29,11 +29,11 @@ namespace EugeneC.Singleton {
                             "Canvas Reference is not set, please set it in the inspector or add it to the scene"
                         );
                 }
-                Pools = new ObjectPool<UiHelper>[poolPrefabs.Length];
-                RuntimePools = new RuntimePoolSerialize[poolPrefabs.Length];
+                Pools = new ObjectPool<UiHelper>[poolAttributes.poolPrefabs.Length];
+                RuntimePools = new RuntimePoolSerialize[poolAttributes.poolPrefabs.Length];
 
-                for (var i = 0; i < poolPrefabs.Length; i++) {
-                    if (poolPrefabs[i].prefab is null) continue;
+                for (var i = 0; i < poolAttributes.poolPrefabs.Length; i++) {
+                    if (poolAttributes.poolPrefabs[i].prefab is null) continue;
 
                     //Set the length to 1 as there should be only one instance of that type of UI at a time
                     RuntimePools[i].spawn = new UiHelper[1];
@@ -42,7 +42,7 @@ namespace EugeneC.Singleton {
 
                     // Initialize the pool
                     Pools[i] = InitPool(() => {
-                        var spawn = Instantiate(poolPrefabs[id].prefab, CanvasPos);
+                        var spawn = Instantiate(poolAttributes.poolPrefabs[id].prefab, CanvasPos);
                         return spawn;
                     });
                 }
@@ -74,7 +74,7 @@ namespace EugeneC.Singleton {
         public event Action OnCloseUi;
 
         protected virtual void ForcedNewInstance() {
-            for (var i = 0; i < poolPrefabs.Length; i++) {
+            for (var i = 0; i < poolAttributes.poolPrefabs.Length; i++) {
                 var spawnUi = Pools[i].Get();
                 spawnUi.gameObject.transform.SetSiblingIndex(i);
                 spawnUi.OnSpawn();
@@ -123,7 +123,7 @@ namespace EugeneC.Singleton {
             return (newUi, true);
         }
 
-        public virtual async Awaitable<bool> CloseAll() {
+        public virtual async Awaitable<bool> CloseAll(bool forcedAbort = false) {
             IsTransitioning = true;
             var i = 0f;
 
@@ -134,11 +134,13 @@ namespace EugeneC.Singleton {
                 i = i < t ? t : i;
             }
 
+            if (forcedAbort) i = 0f;
             await Awaitable.WaitForSecondsAsync(i, Token);
 
             foreach (var ui in _openedUi) {
                 ui.OnEndClose();
-                await Awaitable.NextFrameAsync(Token);
+                if (!forcedAbort)
+                    await Awaitable.NextFrameAsync(Token);
                 ui.gameObject.SetActive(false);
             }
 

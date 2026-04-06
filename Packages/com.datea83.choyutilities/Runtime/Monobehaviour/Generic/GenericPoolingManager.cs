@@ -10,7 +10,28 @@ namespace EugeneC.Singleton {
         where TObj : Component
         where TMono : MonoBehaviour {
 
-        [SerializeField] protected InitialPoolSerialize[] poolPrefabs;
+        public abstract class PoolingAttributes : ScriptableObject {
+            
+            public InitialPoolSerialize[] poolPrefabs;
+            [Serializable]
+            public struct InitialPoolSerialize {
+
+                public TObj prefab;
+                public TEnum id;
+
+            }
+        }
+
+        [Serializable]
+        public struct RuntimePoolSerialize {
+
+            public TObj[] spawn;
+            public int currentIndex;
+            public int previousIndex;
+
+        }
+        
+        [SerializeField] protected PoolingAttributes poolAttributes;
         [SerializeField] protected byte poolCount = 32;
         protected List<int> PauseIndexes;
 
@@ -30,14 +51,14 @@ namespace EugeneC.Singleton {
         protected virtual async void Start() {
             try {
                 await Awaitable.NextFrameAsync(Token);
-                Pools = new ObjectPool<TObj>[poolPrefabs.Length];
-                RuntimePools = new RuntimePoolSerialize[poolPrefabs.Length];
+                Pools = new ObjectPool<TObj>[poolAttributes.poolPrefabs.Length];
+                RuntimePools = new RuntimePoolSerialize[poolAttributes.poolPrefabs.Length];
 
                 for (var i = 0; i < Pools.Length; i++) {
-                    if (poolPrefabs[i].prefab is null) continue;
+                    if (poolAttributes.poolPrefabs[i].prefab is null) continue;
 
                     RuntimePools[i].spawn = new TObj[poolCount];
-                    Pools[i] = InitPool(poolPrefabs[i].prefab);
+                    Pools[i] = InitPool(poolAttributes.poolPrefabs[i].prefab);
 
                     if (!InitializeOnStart) continue;
 
@@ -65,7 +86,7 @@ namespace EugeneC.Singleton {
         protected virtual int GetPoolIndex(TEnum id) {
             if (!Enum.IsDefined(typeof(TEnum), id)) return -1;
 
-            return Array.FindIndex(poolPrefabs, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
+            return Array.FindIndex(poolAttributes.poolPrefabs, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
         }
 
         protected virtual ObjectPool<TObj> InitPool(Component prefab) {
@@ -86,28 +107,11 @@ namespace EugeneC.Singleton {
                 obj => obj.gameObject.SetActive(false),
                 Destroy,
                 CollectionCheck,
-                poolPrefabs.Length,
+                poolAttributes.poolPrefabs.Length,
                 poolCount
             );
 
             return pool;
-        }
-
-        [Serializable]
-        public struct InitialPoolSerialize {
-
-            public TObj prefab;
-            public TEnum id;
-
-        }
-
-        [Serializable]
-        public struct RuntimePoolSerialize {
-
-            public TObj[] spawn;
-            public int currentIndex;
-            public int previousIndex;
-
         }
 
     }

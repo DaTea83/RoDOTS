@@ -4,7 +4,6 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace RoDOTS.runtime {
-    
     public class UIManager : GenericLegacyUIManager<UIManager.EUiType, UIManager> {
 
         public enum EUiType : byte {
@@ -57,7 +56,7 @@ namespace RoDOTS.runtime {
         }
         
         private UnityAction<Scene> OnExitScene() {
-            _ = CloseAll();
+            _ = CloseAll(true);
             return null;
         }
     }

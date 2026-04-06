@@ -12,7 +12,7 @@ namespace EugeneC.Singleton {
         protected override void Awake() {
             base.Awake();
 
-            foreach (var p in poolPrefabs) {
+            foreach (var p in poolAttributes.poolPrefabs) {
                 var particle = p.prefab;
                 var particleMain = particle.main;
                 particleMain.playOnAwake = false;

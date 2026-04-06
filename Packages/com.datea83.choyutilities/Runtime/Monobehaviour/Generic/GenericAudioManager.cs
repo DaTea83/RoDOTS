@@ -7,7 +7,7 @@ using UnityEngine.Pool;
 
 namespace EugeneC.Singleton {
 
-    public abstract class GenericAudioManager<TEnum, TMono> : GenericPoolingManager<TEnum, AudioSource, TMono>
+    public abstract class GenericAudioManager<TEnum, TMono> : GenericSingleton<TMono>
         where TEnum : struct, Enum
         where TMono : MonoBehaviour {
 
@@ -34,8 +34,31 @@ namespace EugeneC.Singleton {
 
         }
 
-        [SerializeField] protected AudioResourceSerialize[] audioResource;
+        public abstract class PoolingAttributes : ScriptableObject {
+            
+            public AudioResourceSerialize[] audioResource;
+            [Serializable]
+            public struct AudioResourceSerialize {
+
+                public AudioResource audio;
+                public TEnum id;
+
+            }
+        }
+
+        [Serializable]
+        public struct AudioMixerSerialize {
+
+            public AudioMixer mixer;
+            public AnimationCurve volumeCurve;
+            public string mixerName;
+            [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
+
+        }
+
+        [SerializeField] protected PoolingAttributes poolAttributes;
         [SerializeField] protected AudioSource audioSourcePrefab;
+        [SerializeField] protected byte poolCount = 32;
         [SerializeField] protected bool loop;
         [SerializeField] protected EAudioPriority priority = EAudioPriority.High;
 
@@ -44,26 +67,36 @@ namespace EugeneC.Singleton {
 
         [SerializeField] protected AudioMixerSerialize sfxMixerGroup, narrationMixerGroup, musicMixerGroup;
 
-        protected override async void Start() {
+        protected ObjectPool<AudioSource> Pool;
+        protected AudioSource[] AudioSources;
+        protected List<int> PauseIndexes;
+        
+        private byte _previousIndex;
+        private byte _currentIndex;
+        
+        protected virtual async void Start() {
             try {
                 await Awaitable.NextFrameAsync(Token);
 
                 if (audioSourcePrefab is null) throw new Exception("Audio Source Prefab is not set");
+                AudioSources = new AudioSource[poolCount];
 
-                Pools = new ObjectPool<AudioSource>[1];
-                RuntimePools = new RuntimePoolSerialize[1];
-
-                Pools[0] = InitPool(audioSourcePrefab);
-
-                RuntimePools[0].spawn = new AudioSource[poolCount];
-
+                Pool = new ObjectPool<AudioSource>(
+                    () => Instantiate(audioSourcePrefab, transform),
+                    obj => obj.gameObject.SetActive(true),
+                    obj => obj.gameObject.SetActive(false),
+                    Destroy,
+                    false,
+                    poolCount,
+                    poolCount << 1);
+                
                 for (var i = 0; i < poolCount; i++) {
-                    var spawnAudio = Pools[0].Get();
+                    var spawnAudio = Pool.Get();
                     spawnAudio.gameObject.transform.SetSiblingIndex(i);
                     spawnAudio.loop = loop;
                     spawnAudio.outputAudioMixerGroup = masterAudioMixerGroup.mixer.outputAudioMixerGroup;
                     spawnAudio.priority = (int)priority;
-                    RuntimePools[0].spawn[i] = spawnAudio;
+                    AudioSources[i] = spawnAudio;
                 }
 
                 masterAudioMixerGroup.mixer.SetFloat(masterAudioMixerGroup.mixerName,
@@ -77,10 +110,19 @@ namespace EugeneC.Singleton {
             }
         }
 
-        protected override int GetPoolIndex(TEnum id) {
+        protected virtual void OnEnable() {
+            PauseIndexes = ListPool<int>.Get();
+        }
+
+        protected override void OnDisable() {
+            ListPool<int>.Release(PauseIndexes);
+            base.OnDisable();
+        }
+
+        protected virtual int GetPoolIndex(TEnum id) {
             if (!Enum.IsDefined(typeof(TEnum), id)) return -1;
 
-            return Array.FindIndex(audioResource, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
+            return Array.FindIndex(poolAttributes.audioResource, i => EqualityComparer<TEnum>.Default.Equals(i.id, id));
         }
 
         public virtual float PlayClipAtPos(TEnum id, float3 pos, byte audioPriority = (byte)EAudioPriority.Average) {
@@ -88,14 +130,14 @@ namespace EugeneC.Singleton {
 
             if (index == -1) throw new Exception("Audio Resource not found");
 
-            var resource = audioResource[index].audio;
+            var resource = poolAttributes.audioResource[index].audio;
 
             return PlayClipAtPos(resource, pos, masterAudioMixerGroup.mixer.outputAudioMixerGroup, audioPriority);
         }
 
         public virtual float PlayClipAtPos(AudioResource resource, float3 pos, AudioMixerGroup channel = null,
             byte audioPriority = (byte)EAudioPriority.Average) {
-            var currentSource = RuntimePools[0].spawn[RuntimePools[0].currentIndex];
+            var currentSource = AudioSources[_currentIndex];
 
             currentSource.transform.localPosition = pos;
             currentSource.outputAudioMixerGroup = channel;
@@ -105,9 +147,9 @@ namespace EugeneC.Singleton {
 
             var lengthSeconds = currentSource.clip?.length ?? 0f;
 
-            RuntimePools[0].previousIndex = RuntimePools[0].currentIndex;
-            RuntimePools[0].currentIndex++;
-            RuntimePools[0].currentIndex %= RuntimePools[0].spawn.Length;
+            _previousIndex = _currentIndex;
+            _currentIndex++;
+            _currentIndex %= (byte)AudioSources.Length;
 
             return lengthSeconds;
         }
@@ -118,7 +160,7 @@ namespace EugeneC.Singleton {
 
             if (index == -1) throw new Exception("Audio Resource not found");
 
-            var resource = audioResource[index].audio;
+            var resource = poolAttributes.audioResource[index].audio;
 
             return PlayClipAtPos(resource, pos, mixerType, audioPriority);
         }
@@ -135,7 +177,7 @@ namespace EugeneC.Singleton {
         public virtual float PlayClipAtPos(AudioResource resource, float3 pos, EMixerType mixerType,
             byte audioPriority = (byte)EAudioPriority.Average) {
             var channel = GetMixerType(mixerType).mixer;
-            var currentSource = RuntimePools[0].spawn[RuntimePools[0].currentIndex];
+            var currentSource = AudioSources[_currentIndex];
 
             currentSource.transform.localPosition = pos;
             currentSource.outputAudioMixerGroup = channel.outputAudioMixerGroup;
@@ -145,9 +187,9 @@ namespace EugeneC.Singleton {
 
             var lengthSeconds = currentSource.clip?.length ?? 0f;
 
-            RuntimePools[0].previousIndex = RuntimePools[0].currentIndex;
-            RuntimePools[0].currentIndex++;
-            RuntimePools[0].currentIndex %= RuntimePools[0].spawn.Length;
+            _previousIndex = _currentIndex;
+            _currentIndex++;
+            _currentIndex %= (byte)AudioSources.Length;
 
             return lengthSeconds;
         }
@@ -158,7 +200,7 @@ namespace EugeneC.Singleton {
 
             if (index == -1) return 0f;
 
-            var resource = audioResource[index].audio;
+            var resource = poolAttributes.audioResource[index].audio;
             var delay = PlayClipAtPos(resource, pos, mixerType, audioPriority);
             var curve = GetMixerType(mixerType).volumeCurve;
             var c0 = GetMixerType(mixerType);
@@ -191,8 +233,8 @@ namespace EugeneC.Singleton {
         }
 
         public virtual bool StopClip(int idx = -1) {
-            idx = idx == -1 ? RuntimePools[0].previousIndex : idx;
-            var source = RuntimePools[0].spawn[idx];
+            idx = idx == -1 ? _previousIndex : idx;
+            var source = AudioSources[idx];
 
             if (!source.isPlaying) return false;
             source.Stop();
@@ -203,8 +245,8 @@ namespace EugeneC.Singleton {
         public virtual bool PauseAllClips(bool isStop = false) {
             PauseIndexes = ListPool<int>.Get();
 
-            for (var i = 0; i < RuntimePools[0].spawn.Length; i++) {
-                var currentSource = RuntimePools[0].spawn[i];
+            for (var i = 0; i < AudioSources.Length; i++) {
+                var currentSource = AudioSources[i];
 
                 if (!currentSource.isPlaying) continue;
 
@@ -215,36 +257,18 @@ namespace EugeneC.Singleton {
                 PauseIndexes.Add(i);
             }
 
-            return PauseIndexes.Count == RuntimePools[0].spawn.Length;
+            return PauseIndexes.Count == AudioSources.Length;
         }
 
         public virtual bool ResumeClips() {
             if (PauseIndexes is null) return false;
 
             foreach (var index in PauseIndexes)
-                RuntimePools[0].spawn[index].Play();
+                AudioSources[index].Play();
 
             ListPool<int>.Release(PauseIndexes);
 
             return true;
-        }
-
-        [Serializable]
-        public struct AudioResourceSerialize {
-
-            public AudioResource audio;
-            public TEnum id;
-
-        }
-
-        [Serializable]
-        public struct AudioMixerSerialize {
-
-            public AudioMixer mixer;
-            public AnimationCurve volumeCurve;
-            public string mixerName;
-            [Range(-80f, 20f)] public float defaultVolume, focusedVolume, unfocusedVolume;
-
         }
 
     }

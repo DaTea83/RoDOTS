@@ -514,9 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: RoDOTS.runtime::RoDOTS.runtime.UIManager
   getWorld: 1
-  poolPrefabs:
-  - prefab: {fileID: 948029445359923758, guid: e353571eb3a98784c939636fc0573510, type: 3}
-    id: 100
+  poolAttributes: {fileID: 11400000, guid: 6c6f727d8be4f7c4da28adf3b0d01862, type: 2}
   poolCount: 1
   canvasRef: {fileID: 996803956892923187}
 --- !u!4 &1638165761

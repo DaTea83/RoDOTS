@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.16] - 2026-04-06
+
+### Changed
+* GenericPoolingManager, now use scriptable object to store pool data
+* GenericLegacyUIManager, CloseAll() added parameter to immediately close UI
+* GenericAudioManager, now no longer inherit from GenericPoolingManager
+* GenericAudioManager, now use scriptable object to store pool data
+
 ## [0.1.15] - 2026-04-04
 
 ### Added
