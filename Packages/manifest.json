@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.datea83.choyutilities.common": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Common",
+    "com.datea83.choyutilities.entities": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Entities",
     "com.unity.ai.navigation": "2.0.9",
     "com.unity.collab-proxy": "2.11.2",
     "com.unity.entities": "1.4.2",

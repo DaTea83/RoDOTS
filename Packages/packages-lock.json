@@ -7,12 +7,24 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.datea83.choyutilities": {
-      "version": "file:com.datea83.choyutilities",
+    "com.datea83.choyutilities.common": {
+      "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Common",
       "depth": 0,
-      "source": "embedded",
+      "source": "git",
       "dependencies": {
-        "com.unity.test-framework": "1.6.0",
+        "com.unity.burst": "1.8.27",
+        "com.unity.collections": "2.6.5",
+        "com.unity.mathematics": "1.3.2",
+        "com.unity.inputsystem": "1.18.0",
+        "com.unity.test-framework": "1.6.0"
+      },
+      "hash": "2f3e962d978f17db44aa62b1eeae48d661f3e5ff"
+    },
+    "com.datea83.choyutilities.entities": {
+      "version": "https://github.com/DaTea83/ChoyUtilities.git?path=src/ChoyUtilities/Assets/ChoyUtilities/Entities",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
         "com.unity.burst": "1.8.27",
         "com.unity.collections": "2.6.5",
         "com.unity.mathematics": "1.3.2",
@@ -20,8 +32,11 @@
         "com.unity.entities.graphics": "1.4.18",
         "com.unity.physics": "1.4.5",
         "com.unity.inputsystem": "1.18.0",
-        "com.unity.localization": "1.5.9"
-      }
+        "com.datea83.choyutilities.common": "1.0.0",
+        "com.unity.test-framework": "1.6.0",
+        "com.unity.render-pipelines.universal": "17.0.4"
+      },
+      "hash": "2f3e962d978f17db44aa62b1eeae48d661f3e5ff"
     },
     "com.unity.2d.animation": {
       "version": "13.0.4",

@@ -1,4 +1,4 @@
-﻿using EugeneC.Singleton;
+﻿using ChoyUtilities;
 
 namespace RoDOTS.runtime {
 

@@ -1,4 +1,4 @@
-﻿using EugeneC.Singleton;
+﻿using ChoyUtilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -50,7 +50,6 @@ namespace RoDOTS.runtime {
         }
         
         private UnityAction<Scene, LoadSceneMode> OnNewScene() {
-            GetWorld();
             _ = Open(EUiType.Basic);
             return null;
         }

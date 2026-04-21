@@ -1,4 +1,4 @@
-﻿using EugeneC.ECS;
+﻿using ChoyUtilities.Entities;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RoDOTS.runtime {
 
-    [UpdateInGroup(typeof(EuCPostTransformSystemGroup))]
+    [UpdateInGroup(typeof(TeaPostTransformSystemGroup))]
     public partial struct RobotStateISystem : ISystem {
 
         private int _movement;

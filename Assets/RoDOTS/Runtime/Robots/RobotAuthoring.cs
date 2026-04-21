@@ -1,4 +1,4 @@
-using EugeneC.ECS;
+using ChoyUtilities.Entities;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
