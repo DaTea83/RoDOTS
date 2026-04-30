@@ -21,12 +21,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 46f6e9ff0de84ac4da4595cd1a128e06
-    m_Address: UI Table_zh-Hans
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-zh-Hans
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dcb11d7f6ed47a34c8dfcb9402d57f1c
     m_Address: RoDOTS_Menu_zh-Hans
     m_ReadOnly: 1

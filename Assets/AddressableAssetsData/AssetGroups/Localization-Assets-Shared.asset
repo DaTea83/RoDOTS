@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: e9878db986f32bc4e9accc21d6c062cb
   m_SerializeEntries:
-  - m_GUID: 257ead27c8625854286d326eaf4457a9
-    m_Address: Packages/com.datea83.choyutilities/Resources/Locale/Table/UI/UI Table
-      Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9bc747ac1c8e8d44c93b2b5b36973597
     m_Address: Assets/RoDOTS/Resources/Locale/RoDOTS_Smart Shared Data.asset
     m_ReadOnly: 1

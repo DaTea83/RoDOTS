@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: dcbbd3c721b82494b9e038d1cf08257b
   m_SerializeEntries:
-  - m_GUID: 247e942ef547b77489e54f3360eb88ff
-    m_Address: UI Table_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a63726e80af571146a38d636f92f3bcd
     m_Address: RoDOTS_Smart_en
     m_ReadOnly: 1
